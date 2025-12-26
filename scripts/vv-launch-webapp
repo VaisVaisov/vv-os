@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+# Запуск webapp через браузер с поддержкой --app
+# Адаптировано из Omarchy для VV Shell
+
+# Получаем дефолтный браузер
+browser=$(xdg-settings get default-web-browser)
+
+# Проверяем, поддерживает ли браузер --app
+case $browser in
+  google-chrome* | brave-browser* | microsoft-edge* | opera* | vivaldi*)
+    # Поддерживает --app
+    ;;
+  *)
+    # Fallback на chromium
+    browser="chromium.desktop"
+    ;;
+esac
+
+# Находим исполняемый файл браузера
+browser_exec=$(sed -n 's/^Exec=\([^ ]*\).*/\1/p' \
+  {~/.local,~/.nix-profile,/usr}/share/applications/$browser 2>/dev/null \
+  | head -1)
+
+# Запускаем как webapp
+exec setsid $browser_exec --app="$1" "${@:2}"

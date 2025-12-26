@@ -1,0 +1,61 @@
+# Руководство по использованию prime-launcher
+#
+# prime-launcher - универсальный лаунчер для игр
+# Автоматически применяет GameMode + NVIDIA GPU (prime-run)
+#
+# ═══════════════════════════════════════════════════════════════════════════
+
+## Как использовать
+
+### Steam
+1. Правый клик на игру → Свойства
+2. Параметры запуска:
+   prime-launcher %command%
+
+### Lutris
+1. Открыть игру → Configure
+2. System options → Command prefix:
+   prime-launcher
+
+### XMCL (Minecraft)
+1. Settings → Java
+2. Wrapper command:
+   prime-launcher
+
+### AAGL (An Anime Game Launcher - Genshin Impact)
+1. Settings → Game
+2. Запуск игры → Custom command:
+   prime-launcher genshin-impact
+
+### Ручной запуск
+terminal:
+prime-launcher ./your-game
+
+## Что делает prime-launcher?
+
+1. ✅ Включает GameMode (CPU governor → performance, приоритеты)
+2. ✅ Включает NVIDIA GPU через prime-run (вместо Intel iGPU)
+3. ✅ Автоматически применяется для всех игр, где прописан
+
+## Когда использовать?
+
+✅ Используй для:
+- Игры (Steam, Lutris, эмуляторы)
+- 3D приложения (Blender, Kdenlive)
+- Тяжелые задачи, требующие GPU
+
+❌ НЕ используй для:
+- Браузер, VS Code, терминал
+- Легкие приложения
+- Всё, что не требует GPU/производительности
+
+## Проверка работы
+
+terminal:
+# Запусти игру с prime-launcher
+# В другом терминале:
+gamemodelist  # Должен показать активные процессы
+nvidia-smi    # Должен показать процесс на GPU
+
+═══════════════════════════════════════════════════════════════════════════
+Обновлено: 2025-12-25

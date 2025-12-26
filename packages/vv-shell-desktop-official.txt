@@ -1,0 +1,10 @@
+# Оболочка и рабочий стол
+sddm
+plymouth
+polkit-kde-agent
+xdg-desktop-portal-hyprland
+qt5-wayland
+qt6-wayland
+qt6-multimedia-ffmpeg
+qt6-virtualkeyboard
+webkit2gtk-4.1

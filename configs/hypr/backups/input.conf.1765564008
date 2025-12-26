@@ -1,0 +1,14 @@
+# Ввод
+input {
+    kb_layout = us,ru
+    kb_options = grp:alts_toggle
+    
+    repeat_rate = 40
+    repeat_delay = 600
+    numlock_by_default = false
+    
+    touchpad {
+        natural_scroll = true
+        scroll_factor = 0.4
+    }
+}

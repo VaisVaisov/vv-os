@@ -1,0 +1,45 @@
+# VV OS Live ISO packages
+
+# Base system
+base
+linux
+linux-firmware
+sof-firmware
+
+# Boot
+grub
+efibootmgr
+os-prober
+
+# Network
+networkmanager
+nm-connection-editor
+openssh
+wget
+curl
+
+# File systems
+dosfstools
+e2fsprogs
+ntfs-3g
+exfatprogs
+btrfs-progs
+
+# Archinstall
+archinstall
+
+# VV OS installer dependencies
+git
+gum
+
+# Utilities
+nano
+vim
+man-db
+man-pages
+bash-completion
+
+# Optional but useful
+htop
+mc
+dialog

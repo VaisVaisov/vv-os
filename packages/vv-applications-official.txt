@@ -1,0 +1,7 @@
+# Пользовательские приложения
+chromium
+telegram-desktop
+thunderbird
+thunderbird-i18n-en-us
+thunderbird-i18n-ru
+libreoffice-fresh

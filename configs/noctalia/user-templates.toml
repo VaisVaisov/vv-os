@@ -1,0 +1,16 @@
+# User templates for Noctalia Shell
+# Дополнительные шаблоны для приложений, которые не поддерживаются встроенно
+
+[config]
+reload_apps = true
+
+# Powerlevel10k prompt
+[templates.p10k]
+input_path = '~/.config/matugen/p10k.zsh'
+output_path = '~/.p10k.zsh'
+
+# bat syntax highlighting
+[templates.bat]
+input_path = '~/.config/matugen/material3.tmTheme'
+output_path = '~/.config/bat/themes/Material3.tmTheme'
+post_hook = 'bat cache --build'

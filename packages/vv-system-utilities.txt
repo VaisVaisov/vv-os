@@ -1,0 +1,17 @@
+# Системные утилиты
+brightnessctl
+pamixer
+playerctl
+wl-clipboard
+grim
+slurp
+inotify-tools
+imagemagick
+jq
+zram-generator
+man-db
+unzip
+p7zip
+zip
+pacman-contrib
+gum

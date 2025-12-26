@@ -1,0 +1,4 @@
+# NVIDIA драйверы (опционально)
+nvidia-open-dkms
+nvidia-utils
+nvidia-settings

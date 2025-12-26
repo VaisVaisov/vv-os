@@ -1,0 +1,4 @@
+# Пользовательские приложения
+yandex-music
+anytype-bin
+happ-desktop-bin

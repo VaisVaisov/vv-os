@@ -1,0 +1,13 @@
+# Оболочка и рабочий стол
+# Hyprland стек (порядок важен для установки!)
+hyprutils-git
+hyprgraphics-git
+hyprlang-git
+hyprcursor-git
+aquamarine-git
+hyprland-git
+quickshell-git
+noctalia-shell-git
+hyprgrass-git
+grimblast-git
+light

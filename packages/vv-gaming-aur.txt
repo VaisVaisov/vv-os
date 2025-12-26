@@ -1,0 +1,4 @@
+# Игры и эмуляторы
+steamtinkerlaunch
+xmcl-launcher
+an-anime-game-launcher-bin

@@ -1,0 +1,12 @@
+# Базовая система Arch Linux
+base
+base-devel
+linux-zen
+linux-zen-headers
+linux-firmware
+intel-ucode
+intel-media-driver
+mesa
+mesa-utils
+vulkan-intel
+vulkan-tools

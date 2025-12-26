@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: VV OS Discussions
+    url: https://github.com/VaisVaisov/vv-os/discussions
+    about: Ask questions and discuss VV OS with the community
+  - name: Arch Linux Wiki
+    url: https://wiki.archlinux.org/
+    about: General Arch Linux documentation and troubleshooting
+  - name: Hyprland Wiki
+    url: https://wiki.hypr.land/
+    about: Hyprland compositor documentation
