@@ -316,6 +316,10 @@ run_archinstall() {
     exit 0
   }
 
+  info "Initializing pacman keyring..."
+  pacman-key --init
+  pacman-key --populate archlinux
+
   echo ""
   info "Launching archinstall..."
   echo ""
