@@ -1,0 +1,6 @@
+# Инструменты разработки
+docker-desktop
+claude-code
+claude-desktop
+claude-desktop-debug
+neohtop-bin

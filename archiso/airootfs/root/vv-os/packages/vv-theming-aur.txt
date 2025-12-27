@@ -1,0 +1,7 @@
+# Темы и шрифты
+matugen-bin
+plymouth-themes-adi1090x-git
+sddm-astronaut-theme
+gtk-cyberpunk-neon-theme-git
+nerd-fonts-inter
+ttf-icomoon-feather

@@ -1,0 +1,51 @@
+# VV OS .gitignore
+
+# Claude Code инструкции (не для публичного репо)
+CLAUDE.md
+
+# Dev container (локальная разработка)
+.devcontainer/
+.devcontainer.backup-arch/
+
+# Временные файлы
+*.tmp
+*.log
+*.swp
+*.swo
+*~
+
+# Локальные конфиги IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Референсные проекты (не включаем в основной репозиторий)
+omarchy-master/
+
+# Пользовательские файлы
+.env
+secrets/
+*.key
+*.pem
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Временные директории
+tmp/
+temp/
+cache/
+
+# Логи установки
+/var/log/vv-install.log
+/var/log/update-mirrors.log
+
+# Build артефакты
+*.iso
+*.img
+build/
+dist/
+
+# Вложенные git репозитории (используем конфиги напрямую)
+configs/nvim/.git

@@ -46,6 +46,10 @@ rsync -a \
   "$PROFILE_DIR/../" \
   "$PROFILE_DIR/airootfs/root/vv-os/"
 
+# Установка прав на выполнение для всех .sh файлов
+echo "→ Установка прав на выполнение для скриптов..."
+find "$PROFILE_DIR/airootfs/root/vv-os" -type f -name "*.sh" -exec chmod +x {} \;
+
 # Сборка ISO
 echo ""
 echo "→ Сборка ISO..."

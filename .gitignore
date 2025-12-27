@@ -13,6 +13,7 @@ CLAUDE.md
 *.swp
 *.swo
 *~
+user-message.txt
 
 # Локальные конфиги IDE
 .vscode/

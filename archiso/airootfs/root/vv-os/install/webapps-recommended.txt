@@ -1,0 +1,34 @@
+# Список webapps для автоматической установки
+# Формат: NAME|URL|ICON_URL|[CUSTOM_EXEC]|[MIME_TYPES]
+
+# Коммуникация
+WhatsApp|https://web.whatsapp.com/|https://dashboardicons.com/icons/whatsapp.png
+Discord|https://discord.com/channels/@me|https://dashboardicons.com/icons/discord.png
+Telegram|https://web.telegram.org/|https://dashboardicons.com/icons/telegram.png
+
+# Работа
+Gmail|https://mail.google.com/|https://dashboardicons.com/icons/gmail.png
+Google Calendar|https://calendar.google.com/|https://dashboardicons.com/icons/google-calendar.png
+Google Drive|https://drive.google.com/|https://dashboardicons.com/icons/google-drive.png
+Notion|https://notion.so/|https://dashboardicons.com/icons/notion.png
+
+# Разработка
+GitHub|https://github.com/|https://dashboardicons.com/icons/github.png
+ChatGPT|https://chatgpt.com/|https://dashboardicons.com/icons/chatgpt.png
+Claude|https://claude.ai/|https://dashboardicons.com/icons/anthropic.png
+
+# Медиа
+YouTube|https://youtube.com/|https://dashboardicons.com/icons/youtube.png
+Spotify|https://open.spotify.com/|https://dashboardicons.com/icons/spotify.png
+Яндекс Музыка|https://music.yandex.ru/|https://yastatic.net/s3/home-static/_/37/37a02b5dc7a51abac55d8a5b6c865f0e.png
+
+# Социальные сети
+X (Twitter)|https://x.com/|https://dashboardicons.com/icons/x.png
+Reddit|https://reddit.com/|https://dashboardicons.com/icons/reddit.png
+
+# Дизайн
+Figma|https://figma.com/|https://dashboardicons.com/icons/figma.png
+Canva|https://canva.com/|https://dashboardicons.com/icons/canva.png
+
+# Другое
+Google Photos|https://photos.google.com/|https://dashboardicons.com/icons/google-photos.png

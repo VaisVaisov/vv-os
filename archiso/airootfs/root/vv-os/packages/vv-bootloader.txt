@@ -1,0 +1,8 @@
+# Загрузчик и файловая система
+grub
+grub-btrfs
+efibootmgr
+os-prober
+btrfs-progs
+snapper
+snap-pac

@@ -20,28 +20,8 @@ export VV_INSTALL_LOG_FILE="/var/log/vv-install.log"
 # Добавляем bin в PATH (для пользовательских скриптов)
 export PATH="$HOME/.local/bin:$PATH"
 
-# Определение языка системы
-detect_language() {
-    case "$LANG" in
-        ru_RU*) LANG_CODE="ru" ;;
-        *)      LANG_CODE="en" ;;
-    esac
-    export LANG_CODE
-}
-
-# Загрузка языковых файлов
-load_language() {
-    if [ -f "$VV_LANG/${LANG_CODE}.sh" ]; then
-        source "$VV_LANG/${LANG_CODE}.sh"
-    else
-        echo "Warning: Language file not found, falling back to English"
-        source "$VV_LANG/en.sh"
-    fi
-}
-
-# Инициализация
-detect_language
-load_language
+# Load English language file (only supported language)
+source "$VV_LANG/en.sh"
 
 # Приветствие
 echo "${MSG_WELCOME:-Welcome to VV OS Installer}"

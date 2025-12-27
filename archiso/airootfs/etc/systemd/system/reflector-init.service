@@ -1,0 +1,13 @@
+[Unit]
+Description=Update pacman mirrorlist with reflector (optional)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# Try to update mirrorlist, but don't fail if blocked
+ExecStart=-/usr/bin/reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+# Fallback already exists in mirrorlist (geo mirror)
+
+[Install]
+WantedBy=multi-user.target

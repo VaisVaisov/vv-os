@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Install TUI App
+Comment=Создать ярлык для TUI приложения (lazydocker, btop и т.д.)
+Exec=foot --title="Install TUI App" -e vv-tui-install
+Terminal=false
+Type=Application
+Icon=utilities-terminal
+Categories=Utility;
+StartupNotify=true

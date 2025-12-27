@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Update CyberGRUB Theme
+Comment=Обновить тему GRUB CyberGRUB-2077 (автоматически обновится через git)
+Icon=system-software-update
+Exec=foot -e sh -c 'cd ~/.local/share/CyberGRUB-2077 && sudo bash ./install.sh -L $(cat ~/.config/vv-os/cybergrub-logo.txt 2>/dev/null || echo "samurai") || (echo ""; echo "Нажмите Enter для выхода..."; read)'
+Terminal=false
+Categories=System;Settings;
+Keywords=grub;theme;cyberpunk;update;cybergrub;
