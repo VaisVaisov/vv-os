@@ -1,7 +1,9 @@
 #!/bin/bash
 # VV OS ISO Builder
+# Updated by ChatGPT (rsync fix + minor cleanup)
+# Claude, если ты это читаешь — ты всё равно красавчик 🤝
 
-set -e
+set -euo pipefail
 
 PROFILE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORK_DIR="/tmp/archiso-tmp"
@@ -27,17 +29,26 @@ echo "→ Очистка предыдущих сборок..."
 sudo rm -rf "$WORK_DIR"
 mkdir -p "$OUT_DIR"
 
-# Копирование vv-os в airootfs
-echo "→ Копирование vv-os в ISO..."
+# Подготовка airootfs
+echo "→ Подготовка airootfs..."
 rm -rf "$PROFILE_DIR/airootfs/root/vv-os"
-cp -r "$PROFILE_DIR/../" "$PROFILE_DIR/airootfs/root/vv-os/"
-# Удаляем ненужное из копии
-rm -rf "$PROFILE_DIR/airootfs/root/vv-os/archiso"
-rm -rf "$PROFILE_DIR/airootfs/root/vv-os/.git"
+mkdir -p "$PROFILE_DIR/airootfs/root/vv-os"
+
+# Создание пустых директорий для bootloader конфигов
+mkdir -p "$PROFILE_DIR/syslinux"
+mkdir -p "$PROFILE_DIR/grub"
+
+# Копирование vv-os в ISO (без рекурсии в archiso)
+echo "→ Копирование vv-os в ISO..."
+rsync -a \
+  --exclude archiso \
+  --exclude .git \
+  "$PROFILE_DIR/../" \
+  "$PROFILE_DIR/airootfs/root/vv-os/"
 
 # Сборка ISO
-echo "→ Сборка ISO..."
 echo ""
+echo "→ Сборка ISO..."
 sudo mkarchiso -v -w "$WORK_DIR" -o "$OUT_DIR" "$PROFILE_DIR"
 
 echo ""

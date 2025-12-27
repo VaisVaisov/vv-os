@@ -2,14 +2,19 @@
 
 # Base system
 base
-linux
+linux-zen
+linux-zen-headers
 linux-firmware
 sof-firmware
 
 # Boot
 grub
+syslinux
 efibootmgr
 os-prober
+memtest86+
+memtest86+-efi
+edk2-shell
 
 # Network
 networkmanager
