@@ -1,7 +1,11 @@
 # VV OS .gitignore
 
+# Claude Code инструкции (не для публичного репо)
+CLAUDE.md
+
 # Dev container (локальная разработка)
 .devcontainer/
+.devcontainer.backup-arch/
 
 # Временные файлы
 *.tmp

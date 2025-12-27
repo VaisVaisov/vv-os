@@ -1,4 +1,8 @@
 # Системные утилиты
+# Файловые системы
+ntfs-3g
+
+# Управление системой
 brightnessctl
 pamixer
 playerctl
