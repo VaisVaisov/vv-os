@@ -61,7 +61,7 @@ echo "→ Загрузка VV OS..."
 git clone --depth=1 "$REPO_URL" "$INSTALL_DIR"
 
 # Переходим в директорию
-cd "$INSTALL_DIR"
+cd "$INSTALL_DIR/vv-installer"
 
 # Делаем vv-live-installer.sh исполняемым
 chmod +x vv-live-installer.sh

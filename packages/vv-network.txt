@@ -1,4 +1,0 @@
-# Сеть и Bluetooth
-networkmanager
-bluez
-bluez-utils

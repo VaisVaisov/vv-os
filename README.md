@@ -6,91 +6,100 @@
 
 *Hyprland + Noctalia Shell + Gaming Stack*
 
-[Installation](#installation) • [Features](#features) • [Screenshots](#screenshots) • [System Requirements](#system-requirements) • [License](#license)
+[Installation](#installation) • [Features](#features) • [Roadmap](#roadmap) • [System Requirements](#system-requirements) • [License](#license)
+
+**[🇷🇺 Русская версия](README.ru.md)**
 
 </div>
 
 ---
 
-## О проекте
+## About
 
-**VV OS** — кастомный дистрибутив на базе Arch Linux с cyberpunk эстетикой, современным Wayland окружением и полным gaming стеком. Автоматическая установка и настройка всей системы через интерактивный installer.
+**VV OS** is a custom Arch Linux distribution with cyberpunk aesthetics, modern Wayland environment, and complete gaming stack. Automated installation and system configuration through an interactive installer.
 
-### Ключевые особенности
+### Key Features
 
 - **Desktop Environment:** Hyprland (Wayland) + Noctalia Shell (Qt6/QML)
-- **Theming:** Material Design 3 с автогенерацией цветов из обоев (matugen)
+- **Theming:** Material Design 3 with automatic color generation from wallpapers (matugen)
 - **Gaming Stack:** GameMode, Lutris, Wine/Proton, Steam, prime-launcher
-- **GPU Support:** NVIDIA (полная), Intel iGPU (базовая)
+- **GPU Support:** NVIDIA (full), Intel iGPU (basic)
 - **Boot Experience:** CyberGRUB-2077 → Plymouth Cybernetic → SDDM Astronaut
-- **Локализация:** English / Русский
-- **Package Manager:** TUI менеджер пакетов (gum + paru)
-
----
-
-## Screenshots
-
-> **Coming soon!** Скриншоты будут добавлены после первой стабильной сборки
+- **Localization:** English / Russian
+- **Package Manager:** TUI package manager (gum + paru)
 
 ---
 
 ## Installation
 
-### Быстрая установка (из Arch Live ISO)
+### Quick Install (Download ISO)
 
-```bash
-curl -sL https://raw.githubusercontent.com/vaisvaisov/vv-os/main/boot.sh | bash
-```
+**Download the latest VV OS ISO from [Releases](https://github.com/vaisvaisov/vv-os/releases)**
 
-### Ручная установка
+1. Flash to USB drive (use [Rufus](https://rufus.ie/), [Etcher](https://etcher.balena.io/), or `dd`)
+2. Boot from USB
+3. Follow the installer
+4. Reboot and enjoy!
 
-1. Загрузите [Arch Linux Live ISO](https://archlinux.org/download/)
-2. Подключитесь к интернету
-3. Клонируйте репозиторий:
+### Manual Installation (Build ISO yourself)
 
+1. Clone the repository:
 ```bash
 git clone https://github.com/vaisvaisov/vv-os.git
 cd vv-os
-chmod +x vv-live-installer.sh
-./vv-live-installer.sh
 ```
 
-4. Следуйте инструкциям установщика
-5. Перезагрузитесь и выберите Hyprland в SDDM
+2. Build the ISO:
+```bash
+cd archiso
+sudo ./build.sh
+# Result: archiso/out/vv-os-*.iso
+```
 
-### Сборка собственного ISO
+3. Flash ISO to USB drive:
+```bash
+# Using dd (Linux)
+sudo dd if=archiso/out/vv-os-*.iso of=/dev/sdX bs=4M status=progress
 
-Если хотите собрать собственный ISO образ VV OS:
+# Or use Rufus (Windows), Etcher (cross-platform)
+```
+
+4. Boot from USB and follow the installer
+5. Reboot and enjoy!
+
+### Build Your Own ISO
+
+If you want to build your own VV OS ISO image:
 
 ```bash
 cd archiso
 sudo ./build.sh
 ```
 
-Подробные инструкции см. в [archiso/README.md](archiso/README.md)
+See [archiso/README.md](archiso/README.md) for detailed instructions.
 
 ---
 
 ## System Requirements
 
-### Минимальные требования
+### Minimum Requirements
 
-- **Архитектура:** x86_64
-- **RAM:** 8 GB (16 GB рекомендуется для gaming)
-- **Диск:** 50 GB (SSD рекомендуется)
-- **GPU:** 
-  - NVIDIA GTX 1000+/RTX (полная поддержка + gaming)
-  - Intel iGPU (базовая поддержка)
-  - AMD GPU/APU (в планах)
+- **Architecture:** x86_64
+- **RAM:** 8 GB (16 GB recommended for gaming)
+- **Disk:** 50 GB (SSD recommended)
+- **GPU:**
+  - NVIDIA GTX 1000+/RTX (full support + gaming)
+  - Intel iGPU (basic support)
+  - AMD GPU/APU (planned)
 
 ### GPU Support
 
-| GPU Type | Desktop | Gaming | Драйверы | GameMode | Статус |
-|----------|---------|--------|----------|----------|--------|
-| NVIDIA dGPU | ✅ | ✅ | nvidia-dkms | ✅ | Готово |
-| Intel iGPU | ✅ | ⚠️ | mesa | ❌ | Базовая |
-| AMD dGPU | ⚠️ | ❌ | - | ❌ | Planned |
-| AMD APU | ⚠️ | ❌ | - | ❌ | Planned |
+| GPU Type    | Desktop | Gaming | Drivers          | GameMode | Status  |
+| ----------- | ------- | ------ | ---------------- | -------- | ------- |
+| NVIDIA dGPU | ✅       | ✅      | nvidia-open-dkms | ✅        | Ready   |
+| Intel iGPU  | ✅       | ⚠️      | mesa             | ❌        | Basic   |
+| AMD dGPU    | ⚠️       | ❌      | -                | ❌        | Planned |
+| AMD APU     | ⚠️       | ❌      | -                | ❌        | Planned |
 
 ---
 
@@ -100,9 +109,9 @@ sudo ./build.sh
 
 - **Compositor:** Hyprland 0.52.0+ (Wayland)
 - **Shell:** Noctalia Shell 3.7.5 (QuickShell/Qt6)
-- **Launcher:** Встроенный App Launcher + VV Package Manager
+- **Launcher:** Built-in App Launcher + VV Package Manager
 - **Notifications:** Noctalia Notification System
-- **Wallpapers:** Автоматическая генерация Material 3 цветов
+- **Wallpapers:** Automatic Material 3 color generation
 
 ### Installed Applications
 
@@ -110,7 +119,7 @@ sudo ./build.sh
 - **Editor:** Neovim (LazyVim)
 - **Terminal:** Foot + Zsh + Oh-My-Zsh + Powerlevel10k
 - **Version Control:** Git, Lazygit
-- **Containers:** Docker, Docker Compose, Lazydocker
+- **Containers:** Docker, Docker Desktop, Lazydocker
 
 #### Gaming
 - **Launchers:** Steam, Lutris, XMCL (Minecraft)
@@ -124,61 +133,193 @@ sudo ./build.sh
 - **Archive:** PeaZip
 - **Media:** Celluloid (MPV), Strawberry (Music)
 - **Monitor:** btop, SystemMonitor
+- **Power Management:** TLP + ACPI tools
 
 ### Custom Scripts
 
-- `vv-package-manager` — TUI менеджер пакетов (pacman/AUR)
-- `vv-pacman-search` — Поиск в официальных репозиториях
-- `vv-aur-search` — Поиск в AUR
-- `vv-webapp-install` — Установка Web Apps (PWA)
-- `vv-tui-install` — Установка TUI приложений
-- `update-mirrors.sh` — Обновление зеркал через rate-mirrors
+- `vv-package-manager` — TUI package manager (pacman/AUR)
+- `vv-pacman-search` — Search official repositories
+- `vv-aur-search` — Search AUR
+- `vv-webapp-install` — Install Web Apps (PWA)
+- `vv-tui-install` — Install TUI applications
+- `update-mirrors.sh` — Update mirrors via rate-mirrors
+
+---
+
+## Roadmap
+
+### 🎮 GPU Support Expansion
+- **AMD dGPU** - Drivers, GameMode config, Hyprland environment variables
+- **AMD APU** - Optimizations for integrated Radeon Graphics
+- **Intel iGPU Gaming** - GameMode config, Vulkan optimizations, power management
+
+### 🎨 Installer: Calamares Migration
+- **Cyberpunk GUI installer** with magenta/cyan UI
+- **Live ISO with try before install**
+- **Multi-language support out of the box** - Calamares supports multiple languages
+- **Full installation customization**
+- **Direct VV OS integration** into installation process
+
+### 🕹️ Retro Gaming
+- **VV ROM Manager** for RetroArch
+- Myrient API integration for ROM downloads
+- Automatic library organization
+- Optional installation via installer
+
+### 📦 OTA Updates System
+- **VV Repository for pacman**
+- Configs as packages (vv-os-configs, vv-os-themes)
+- Updates via `pacman -Syu`
+- GitHub Pages hosting
+
+### 📱 VV OS for Android (Long-term Vision)
+- **Gaming-focused Android ROM** for turning old phones into retro consoles
+- **RetroArch-centered** - classic consoles out of the box
+- **Gamepad + Touchscreen controls** - Steam Deck-style input (Bluetooth/USB gamepad support + touch-optimized UI)
+- **Cyberpunk UI** in VV OS style + Material 3
+- **Second life** for old hardware (Xiaomi, Samsung, etc.)
+- Gaming performance optimizations
+
+### 🤝 Community
+- **AMD/Intel GPU support** - looking for contributors with hardware for testing
+- Custom themes and configs from community
+- Device support expansion
 
 ---
 
 ## Project Structure
 
 ```
-vv-os/
-├── install/              # Модули установки
-│   ├── helpers/          # Helper функции
-│   ├── preflight/        # Проверки перед установкой
-│   ├── packaging/        # Установка пакетов
-│   ├── config/           # Копирование конфигов
+vv-os/vv-installer/
+├── install/              # Installation modules
+│   ├── helpers/          # Helper functions
+│   ├── preflight/        # Pre-installation checks
+│   ├── packaging/        # Package installation
+│   ├── config/           # Config deployment
 │   ├── login/            # GRUB, Plymouth, SDDM
-│   └── post-install/     # Финализация
-├── packages/             # Списки пакетов по категориям
-├── configs/              # Конфигурационные файлы
+│   └── post-install/     # Finalization
+├── packages/             # Package lists by category
+├── configs/              # Configuration files
 │   ├── hypr/             # Hyprland
 │   ├── noctalia/         # Noctalia Shell
-│   ├── applications/     # .desktop файлы
-│   └── scripts/          # Системные скрипты
-├── scripts/              # Пользовательские скрипты (vv-*)
-├── assets/               # Ресурсы (обои, иконки)
-├── lang/                 # Локализация (EN/RU)
-├── install.sh            # Главный установщик
-├── vv-live-installer.sh  # Wrapper для Live ISO
-└── boot.sh               # Онлайн установщик
+│   ├── applications/     # .desktop files
+│   └── scripts/          # System scripts
+├── scripts/              # User scripts (vv-*)
+├── assets/               # Resources (wallpapers, icons)
+├── lang/                 # Localization (EN/RU)
+├── install.sh            # Main installer
+├── vv-live-installer.sh  # Live ISO wrapper
+└── boot.sh               # Online installer
 ```
+
+---
+
+## Post-Installation
+
+### First Boot
+
+1. Login to SDDM with your user and password
+2. First launch takes 1-2 minutes (generating Material 3 themes from wallpaper)
+
+### Initial Setup
+
+- **Change wallpaper:** Click owl button (top-right) → Control Center → Wallpaper (auto-generates Material 3 colors via matugen)
+- **Configure monitors:** Edit `~/.config/hypr/monitor.conf`
+- **Update system:** `sudo pacman -Syu` or install `vv-package-manager` from scripts
+
+### Essential Keyboard Shortcuts
+
+**Applications:**
+- `Super + Return` - Terminal (foot)
+- `Super + F` - File Manager (nemo)
+- `Super + B` - Browser (chromium)
+- `Super + N` - Neovim
+- `Super + T` - Task Manager (NeoHtop)
+
+**Window Management:**
+- `Super + Q` - Close window
+- `Super + V` - Toggle floating
+- `Super + Shift + F` - Fullscreen
+- `Super + 1-9,0` - Switch workspace
+- `Alt + Tab` - Cycle windows
+
+Full list: `~/.config/hypr/apps.conf`, `~/.config/hypr/tiling.conf`
+
+---
+
+## Troubleshooting
+
+### Black screen after boot (NVIDIA)
+
+If black screen after login:
+
+1. TTY2: `Ctrl+Alt+F2`
+2. Login
+3. Check logs: `journalctl -xeu nvidia-persistenced`
+4. Reinstall: `sudo pacman -S nvidia-open-dkms nvidia-utils`
+
+### WiFi not working
+
+Noctalia Shell should handle it automatically. If not:
+
+```bash
+sudo systemctl enable --now NetworkManager
+nmtui  # Connect via TUI
+```
+
+### Screen tearing / low FPS
+
+Check active GPU:
+
+```bash
+nvidia-smi  # For NVIDIA
+glxinfo | grep "OpenGL renderer"  # General
+```
+
+---
+
+## FAQ
+
+**Q: How to update VV OS?**
+A: `sudo pacman -Syu` (updates everything: system + configs)
+
+**Q: Where are configs?**
+A: `~/.config/hypr/` (Hyprland), `~/.config/noctalia/` (Shell)
+
+**Q: How to change theme colors?**
+A: Control Center (owl button) → Wallpaper → Material 3 auto-generates
+
+**Q: How to install Flatpak apps?**
+A: `vv-flatpak-search` or `flatpak install flathub app-id`
+
+**Q: Gaming performance low (NVIDIA)?**
+A: Use `prime-launcher`: In Steam launch options add `prime-launcher %command%`
+
+---
+
+## Known Issues (v1.0.0)
+
+- **AMD GPU/APU:** Not yet supported (drivers, GameMode config needed)
+- **Intel iGPU:** Basic desktop only, no gaming optimizations yet
 
 ---
 
 ## Contributing
 
-Вклад в проект приветствуется! Особенно нужна помощь с:
+Contributions are welcome! We especially need help with:
 
-- **AMD GPU/APU поддержкой** (у автора нет AMD hardware для тестирования)
-- **Intel iGPU gaming оптимизациями**
-- **Переводами** (сейчас EN/RU)
-- **Тестированием** в разных конфигурациях
+- **AMD GPU/APU support** (author doesn't have AMD hardware for testing)
+- **Intel iGPU gaming optimizations**
+- **Translations** (currently EN/RU)
+- **Testing** on different configurations
 
 ### How to contribute
 
-1. Fork репозиторий
-2. Создайте feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit изменения (`git commit -m 'Add amazing feature'`)
-4. Push в branch (`git push origin feature/amazing-feature`)
-5. Откройте Pull Request
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ---
 
@@ -188,47 +329,26 @@ vv-os/
 
 Copyright © 2025 Vais Vaisov
 
-Разрешено коммерческое использование, модификация, распространение и приватное использование.
+Commercial use, modification, distribution, and private use are permitted.
 
-См. [LICENSE](LICENSE) для подробностей.
+See [LICENSE](LICENSE) for details.
 
 ### Third-Party Components
 
-Некоторые устанавливаемые темы имеют GPL лицензию:
+Some installed themes have GPL licenses:
 - Plymouth Cybernetic (GPL)
 - SDDM Astronaut (GPL)
-- CyberGRUB-2077 (GPL)
 
-GPL компоненты **не влияют** на лицензию VV OS installer, так как они устанавливаются как отдельные пакеты через pacman.
-
----
-
-## Roadmap
-
-### v1.0 (Current)
-- ✅ Базовая установка через archinstall
-- ✅ Hyprland + Noctalia Shell
-- ✅ NVIDIA GPU полная поддержка
-- ✅ Gaming стек (GameMode, Steam, Lutris)
-- ✅ TUI Package Manager
-- ✅ Material 3 theming
-
-### v1.1 (Planned)
-- 📋 AMD dGPU support
-- 📋 AMD APU gaming оптимизации
-- 📋 Intel iGPU gaming оптимизации
-- 📋 archiso профиль (собственный ISO)
-- 📋 VV repository для pacman
-- 📋 Дополнительные локализации
+GPL components **do not affect** the VV OS installer license, as they are installed as separate packages via pacman.
 
 ---
 
 ## Credits
 
-- **Inspiration:** [Omarchy](https://github.com/omarchy/omarchy) - за архитектуру и референсные конфиги
+- **Inspiration:** [Omarchy](https://github.com/omarchy/omarchy) - for architecture and reference configs
 - **Desktop:** [Hyprland](https://hyprland.org/) + [Noctalia Shell](https://github.com/noctalia-dev/noctalia-shell)
-- **Themes:** 
-  - [CyberGRUB-2077](https://github.com/Cyber-Dioxide/CyberGRUB-2077)
+- **Themes:**
+  - [CyberGRUB-2077](https://github.com/adnksharp/CyberGRUB2077)
   - [Plymouth Cybernetic](https://github.com/adi1090x/plymouth-themes)
   - [SDDM Astronaut](https://github.com/Keyitdev/sddm-astronaut-theme)
 

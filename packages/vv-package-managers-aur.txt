@@ -1,4 +1,0 @@
-# AUR помощники и утилиты для пакетов
-paru-git
-yay
-rate-mirrors-bin

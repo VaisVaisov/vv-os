@@ -1,7 +1,5 @@
 #!/bin/bash
 # VV OS ISO Builder
-# Updated by ChatGPT (rsync fix + minor cleanup)
-# Claude, если ты это читаешь — ты всё равно красавчик 🤝
 
 set -euo pipefail
 
@@ -27,7 +25,25 @@ fi
 # Очистка предыдущих сборок
 echo "→ Очистка предыдущих сборок..."
 sudo rm -rf "$WORK_DIR"
+
+# Проверка и очистка /tmp/archiso-tmp
+TMP_DIR="/tmp/archiso-tmp"
+echo "→ Очистка содержимого старого каталога $TMP_DIR..."
+if [ -d "$TMP_DIR" ] && [ "$(ls -A "$TMP_DIR")" ]; then
+    sudo rm -rf "$TMP_DIR/*"
+else
+    echo "→ $TMP_DIR пустой, удалять нечего"
+fi
+
+# Проверка и очистка OUT_DIR
 mkdir -p "$OUT_DIR"
+echo "→ Удаление старых файлов в $OUT_DIR..."
+if [ "$(ls -A "$OUT_DIR")" ]; then
+    rm -rf "$OUT_DIR"/*
+else
+    echo "→ $OUT_DIR пустой, удалять нечего"
+fi
+
 
 # Подготовка airootfs
 echo "→ Подготовка airootfs..."
@@ -43,7 +59,7 @@ echo "→ Копирование vv-os в ISO..."
 rsync -a \
   --exclude archiso \
   --exclude .git \
-  "$PROFILE_DIR/../" \
+  "$PROFILE_DIR/../vv-installer/" \
   "$PROFILE_DIR/airootfs/root/vv-os/"
 
 # Установка прав на выполнение для всех .sh файлов

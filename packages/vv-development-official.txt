@@ -1,9 +1,0 @@
-# Инструменты разработки
-git
-neovim
-code
-docker
-jdk-openjdk
-cmake
-clang
-bat

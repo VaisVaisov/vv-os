@@ -25,7 +25,7 @@ memtest86+
 memtest86+-efi
 edk2-shell
 
-# Network 
+# Network
 iwd
 dhcpcd
 wpa_supplicant
@@ -50,6 +50,8 @@ archinstall
 # VV OS installer dependencies
 git
 gum
+less
+python
 
 # Utilities
 nano

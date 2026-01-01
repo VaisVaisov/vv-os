@@ -1,4 +1,0 @@
-# Медиа приложения
-celluloid
-strawberry
-unrar

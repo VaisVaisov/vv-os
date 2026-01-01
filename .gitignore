@@ -1,5 +1,8 @@
 # VV OS .gitignore
 
+# Долгосрочные фичи
+vv-installer/boot.sh
+
 # Claude Code инструкции (не для публичного репо)
 CLAUDE.md
 
@@ -13,15 +16,11 @@ CLAUDE.md
 *.swp
 *.swo
 *~
-user-message.txt
 
 # Локальные конфиги IDE
 .vscode/
 .idea/
 *.code-workspace
-
-# Референсные проекты (не включаем в основной репозиторий)
-omarchy-master/
 
 # Пользовательские файлы
 .env

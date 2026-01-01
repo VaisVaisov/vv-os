@@ -1,5 +1,0 @@
-# Автозапуск
-exec-once = caelestia shell
-exec-once = /usr/lib/polkit-kde-authentication-agent-1
-exec-once = ~/.local/bin/gtk-color-watcher
-exec-once = wl-paste --watch cliphist store
