@@ -47,5 +47,8 @@ cache/
 build/
 dist/
 
+# Archiso Dockerfile (для будущих GitHub Actions)
+archiso/Dockerfile
+
 # Вложенные git репозитории (используем конфиги напрямую)
 configs/nvim/.git
