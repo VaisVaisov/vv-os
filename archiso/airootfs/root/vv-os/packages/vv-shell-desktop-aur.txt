@@ -8,4 +8,4 @@ aquamarine-git
 hyprland-git
 noctalia-shell-git
 grimblast-git
-light
+neohtop-bin

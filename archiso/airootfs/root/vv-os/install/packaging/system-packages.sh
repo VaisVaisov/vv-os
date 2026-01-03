@@ -8,7 +8,6 @@ categories=(
   "audio"
   "network"
   "system-utilities"
-  "package-managers-official"
   "terminal"
   "file-manager"
 )

@@ -19,7 +19,8 @@ fi
 # Install Plymouth themes (if not already installed)
 if ! plymouth-set-default-theme -l | grep -q "cybernetic"; then
   show_info "$MSG_INSTALL_PLYMOUTH_THEMES"
-  paru -S --needed --noconfirm plymouth-themes-adi1090x-git
+  install_aur_package "plymouth-themes-adi1090x-git"
+  cleanup_builduser
 fi
 
 # Set cybernetic theme

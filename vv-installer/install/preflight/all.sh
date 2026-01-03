@@ -9,3 +9,4 @@ start_install_log
 run_logged "$VV_INSTALL/preflight/check-arch.sh"
 run_logged "$VV_INSTALL/preflight/check-network.sh"
 run_logged "$VV_INSTALL/preflight/pacman.sh"
+run_logged "$VV_INSTALL/preflight/locale-setup.sh"

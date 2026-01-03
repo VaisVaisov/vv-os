@@ -86,7 +86,7 @@ See [archiso/README.md](archiso/README.md) for detailed instructions.
 
 - **Architecture:** x86_64
 - **RAM:** 8 GB (16 GB recommended for gaming)
-- **Disk:** 50 GB (SSD recommended)
+- **Disk:** 32 GB minimum (SSD recommended)
 - **GPU:**
   - NVIDIA GTX 1000+/RTX (full support + gaming)
   - Intel iGPU (basic support)

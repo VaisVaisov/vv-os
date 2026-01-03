@@ -10,9 +10,27 @@ categories=(
   "theming:$MSG_CATEGORY_THEMING"
 )
 
+# Update package database (on all repositories)
+sudo pacman -Sy --noconfirm
+
 for item in "${categories[@]}"; do
   category="${item%%:*}"
   description="${item#*:}"
+
+  # Show package lists for this category
+  if [[ -f "$VV_PACKAGES/vv-${category}-official.txt" ]]; then
+    echo ""
+    show_info "Official ${category} packages:"
+    grep -v '^#' "$VV_PACKAGES/vv-${category}-official.txt" | grep -v '^$' | sed 's/^/  • /'
+    echo ""
+  fi
+
+  if [[ -f "$VV_PACKAGES/vv-${category}-aur.txt" ]]; then
+    echo ""
+    show_info "AUR ${category} packages:"
+    grep -v '^#' "$VV_PACKAGES/vv-${category}-aur.txt" | grep -v '^$' | sed 's/^/  • /'
+    echo ""
+  fi
 
   if gum confirm "$MSG_CONFIRM_CATEGORY ${description}?"; then
     # Official packages

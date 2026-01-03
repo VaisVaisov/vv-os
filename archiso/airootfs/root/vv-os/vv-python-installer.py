@@ -50,7 +50,7 @@ def select_and_partition_disk():
         show_error("Invalid disk path")
         sys.exit(1)
 
-    use_gpt = input("Use GPT partition table? [Y/n]: ").strip().lower()
+    use_gpt = input("Use GPT partition table? [y/n]: ").strip().lower()
     if use_gpt != "n":
         show_info("GPT will be used")
         subprocess.run(["parted", disk, "mklabel", "gpt"], check=True)
@@ -94,7 +94,7 @@ def configure_partitions(disk):
                 continue
 
             # === ПОДТВЕРЖДЕНИЕ ===
-            confirm = input(f'Confirm: format as "{fs}" and mount at "{mount}"? [Y/n]: ').strip().lower()
+            confirm = input(f'Confirm: format as "{fs}" and mount at "{mount}"? [y/n]: ').strip().lower()
             if confirm in ('y'):
                 break
             else:
@@ -102,7 +102,7 @@ def configure_partitions(disk):
 
         subvolumes = []
         if fs == "btrfs":
-            create = input("Create BTRFS subvolumes? [y/N]: ").strip().lower()
+            create = input("Create BTRFS subvolumes? [y/n]: ").strip().lower()
             if create == "y":
                 while True:
                     name = input("Subvolume name (empty to finish): ").strip()

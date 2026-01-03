@@ -6,10 +6,10 @@ show_info "$MSG_SETUP_AVATAR"
 # Check for .face file
 if [[ -f "$VV_ASSETS/avatar/.face" ]]; then
   # Copy .face to home directory
-  cp "$VV_ASSETS/avatar/.face" ~/.face
+  cp "$VV_ASSETS/avatar/.face" $VV_USER_HOME/.face
 
   # Create .face.icon symlink (used by some display managers)
-  ln -sf ~/.face ~/.face.icon
+  ln -sf $VV_USER_HOME/.face $VV_USER_HOME/.face.icon
 
   show_success "$MSG_AVATAR_INSTALLED"
 else

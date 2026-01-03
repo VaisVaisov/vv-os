@@ -1,2 +1,2 @@
 # Media applications
-peazip-gtk2-bin
+peazip-qt-bin

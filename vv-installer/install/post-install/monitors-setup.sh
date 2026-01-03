@@ -20,7 +20,7 @@ case "$MONITOR_COUNT" in
     # Single monitor - simple configuration
     show_info "$MSG_CREATING_SINGLE_MONITOR"
 
-    cat > ~/.config/hypr/monitor.conf <<EOF
+    cat > $VV_USER_HOME/.config/hypr/monitor.conf <<EOF
 # Monitor configuration (single monitor)
 # Auto-detection is used
 monitor=,preferred,auto,1
@@ -38,7 +38,7 @@ EOF
     show_info "$MSG_CREATING_DUAL_MONITOR"
 
     if [[ "$LAYOUT" == "$MSG_LAYOUT_HORIZONTAL" ]]; then
-      cat > ~/.config/hypr/monitor.conf <<EOF
+      cat > $VV_USER_HOME/.config/hypr/monitor.conf <<EOF
 # Monitor configuration (dual horizontal)
 # IMPORTANT: Replace DP-1 and DP-2 with actual monitor names (hyprctl monitors)
 
@@ -52,7 +52,7 @@ monitor=DP-2,preferred,1920x0,1
 monitor=,preferred,auto,1
 EOF
     else
-      cat > ~/.config/hypr/monitor.conf <<EOF
+      cat > $VV_USER_HOME/.config/hypr/monitor.conf <<EOF
 # Monitor configuration (dual vertical)
 # IMPORTANT: Replace DP-1 and DP-2 with actual monitor names (hyprctl monitors)
 
@@ -77,7 +77,7 @@ EOF
     # Three+ monitors - create template
     show_info "$MSG_CREATING_MULTI_MONITOR"
 
-    cat > ~/.config/hypr/monitor.conf <<EOF
+    cat > $VV_USER_HOME/.config/hypr/monitor.conf <<EOF
 # Monitor configuration (multi-monitor template)
 # IMPORTANT: Configure manually after first Hyprland launch
 # Use 'hyprctl monitors' to get monitor list

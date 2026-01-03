@@ -39,8 +39,8 @@ select_services() {
     echo "$selected"
   fi
 
-  confirm=$(gum confirm "$MSG_FIREWALL_CONFIRM" --default=false)
-  if [ "$confirm" != "true" ]; then
+  # gum confirm returns exit code, not text
+  if ! gum confirm "$MSG_FIREWALL_CONFIRM" --default=false; then
     show_info "$MSG_FIREWALL_RESTART_SELECTION"
     select_services
   fi
@@ -50,8 +50,8 @@ select_services() {
 # Custom port
 # -------------------------------------------------------------------
 custom_port_rule() {
-  custom_selected=$(gum confirm "$MSG_FIREWALL_CUSTOM_ASK" --default=false)
-  if [ "$custom_selected" = "true" ]; then
+  # gum confirm returns exit code, not text
+  if gum confirm "$MSG_FIREWALL_CUSTOM_ASK" --default=false; then
     port=$(gum input --placeholder "$MSG_FIREWALL_CUSTOM_PORT")
     protocol=$(gum input --placeholder "$MSG_FIREWALL_CUSTOM_PROTOCOL")
     desc=$(gum input --placeholder "$MSG_FIREWALL_CUSTOM_DESC")

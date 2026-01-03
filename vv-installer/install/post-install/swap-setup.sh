@@ -73,8 +73,27 @@ if [[ ! -f /swapfile ]] && ! grep -q '/swapfile' /etc/fstab 2>/dev/null; then
   else
     # Outside chroot, create swapfile immediately
     show_info "$MSG_CREATE_SWAPFILE (${SWAPFILE_SIZE})..."
-    sudo dd if=/dev/zero of=/swapfile bs=1M count=$((${SWAPFILE_SIZE%G} * 1024)) status=progress
-    sudo chmod 600 /swapfile
+
+    # Detect filesystem type (for Btrfs special handling)
+    ROOT_FS=$(df --output=fstype / | tail -n1)
+
+    # For Btrfs: create empty file and disable COW BEFORE writing data
+    if [[ "$ROOT_FS" == "btrfs" ]]; then
+      show_info "Detected Btrfs, preparing swapfile with NOCOW..."
+      # 1. Create empty file
+      sudo truncate -s 0 /swapfile
+      # 2. Set NOCOW attribute (must be on empty file!)
+      sudo chattr +C /swapfile
+      # 3. Set permissions
+      sudo chmod 600 /swapfile
+      # 4. Allocate space
+      sudo dd if=/dev/zero of=/swapfile bs=1M count=$((${SWAPFILE_SIZE%G} * 1024)) status=progress
+    else
+      # For ext4/XFS: standard creation
+      sudo dd if=/dev/zero of=/swapfile bs=1M count=$((${SWAPFILE_SIZE%G} * 1024)) status=progress
+      sudo chmod 600 /swapfile
+    fi
+
     sudo mkswap /swapfile
 
     if ! grep -q '/swapfile' /etc/fstab; then

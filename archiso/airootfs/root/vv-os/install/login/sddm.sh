@@ -19,8 +19,17 @@ sudo mkdir -p /etc/sddm.conf.d
 # Install sddm-astronaut-theme
 if [[ ! -d "/usr/share/sddm/themes/sddm-astronaut-theme" ]]; then
   show_info "$MSG_INSTALL_SDDM_THEME"
-  paru -S --needed --noconfirm sddm-astronaut-theme
+  install_aur_package "sddm-astronaut-theme"
+  cleanup_builduser
   show_success "$MSG_SDDM_THEME_OK"
+fi
+
+# Configure theme to use cyberpunk.conf
+METADATA_FILE="/usr/share/sddm/themes/sddm-astronaut-theme/metadata.desktop"
+if [[ -f "$METADATA_FILE" ]]; then
+  show_info "Configuring SDDM theme to use cyberpunk.conf..."
+  sudo sed -i 's|ConfigFile=Themes/astronaut.conf|ConfigFile=Themes/cyberpunk.conf|' "$METADATA_FILE"
+  show_success "SDDM theme configured to cyberpunk"
 fi
 
 # Copy theme config

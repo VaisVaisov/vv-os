@@ -51,6 +51,31 @@ check_internet() {
   error "No internet connection detected!"
   echo ""
   warning "Internet is required for installation"
+  echo ""
+
+  info "$(cat <<EOF
+      📡 HOW TO CONNECT TO INTERNET
+
+      WiFi:
+      1. iwctl
+      2. station wlan0 scan
+      3. station wlan0 get-networks
+      4. station wlan0 connect "Your-WiFi-Name"
+      5. exit
+
+      Wired (Ethernet):
+        • Usually connects automatically (DHCP)
+        • If not: dhcpcd
+
+      Check connection:
+        • ping archlinux.org
+        • ip a (check if you have an IP address)
+
+      After connecting, run this installer again. (just type "exit" and push Enter)
+EOF
+)"
+
+    echo ""
   exit 1
 }
 

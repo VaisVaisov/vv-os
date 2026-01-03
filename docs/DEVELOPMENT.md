@@ -25,7 +25,7 @@ cd vv-os
 ## Структура проекта
 
 ```
-/workspaces/vv-os/
+/workspaces/vv-os/vv-installer/
 ├── install/              # Модули установки (нумерованные)
 ├── packages/             # Списки пакетов по категориям
 ├── configs/              # Конфигурационные файлы
@@ -134,15 +134,15 @@ ttf-font-awesome
 
 ### Категории пакетов
 
-| Файл | Описание |
-|------|----------|
-| `base.txt` | Базовые системные пакеты |
-| `desktop.txt` | DE (Hyprland, Noctalia, Qt6) |
-| `gaming.txt` | Игровой стек (GameMode, Lutris, Wine) |
-| `development.txt` | Dev tools (Git, Docker, Neovim) |
-| `theming.txt` | Темы, иконки, шрифты |
-| `multimedia.txt` | Медиа приложения |
-| `utilities.txt` | Системные утилиты |
+| Файл              | Описание                              |
+| ----------------- | ------------------------------------- |
+| `base.txt`        | Базовые системные пакеты              |
+| `desktop.txt`     | DE (Hyprland, Noctalia, Qt6)          |
+| `gaming.txt`      | Игровой стек (GameMode, Lutris, Wine) |
+| `development.txt` | Dev tools (Git, Docker, Neovim)       |
+| `theming.txt`     | Темы, иконки, шрифты                  |
+| `multimedia.txt`  | Медиа приложения                      |
+| `utilities.txt`   | Системные утилиты                     |
 
 ### Добавление нового пакета
 

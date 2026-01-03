@@ -1,0 +1,20 @@
+[Unit]
+Description=Update pacman mirrorlist using rate-mirrors
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/update-mirrors.sh
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening
+PrivateTmp=yes
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/etc/pacman.d /var/log
+
+[Install]
+WantedBy=multi-user.target

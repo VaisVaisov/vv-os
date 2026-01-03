@@ -17,4 +17,12 @@ if ! grep -q "^Color" /etc/pacman.conf; then
   sudo sed -i 's/^#Color/Color/' /etc/pacman.conf
 fi
 
+# Enable multilib repository (32-bit support for gaming)
+if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
+  sudo sed -i '/^#\[multilib\]/,/^#Include = \/etc\/pacman.d\/mirrorlist/ s/^#//' /etc/pacman.conf
+  show_success "$MSG_PACMAN_MULTILIB"
+  # Update package database after enabling multilib
+  sudo pacman -Sy --noconfirm
+fi
+
 show_success "$MSG_PACMAN_OK"

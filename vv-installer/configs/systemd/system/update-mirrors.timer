@@ -1,0 +1,12 @@
+[Unit]
+Description=Weekly pacman mirrorlist update
+Requires=update-mirrors.service
+
+[Timer]
+# Run every Monday at 12:00
+OnCalendar=Mon 12:00
+# If system was off, run 15 minutes after boot
+Persistent=true
+
+[Install]
+WantedBy=timers.target
