@@ -66,8 +66,6 @@ cd archiso
 sudo ./build.sh
 ```
 
-Подробные инструкции см. в [archiso/README.md](archiso/README.md)
-
 ---
 
 ## Системные требования
@@ -75,21 +73,21 @@ sudo ./build.sh
 ### Минимальные требования
 
 - **Архитектура:** x86_64
-- **RAM:** 8 GB (16 GB рекомендуется для gaming)
-- **Диск:** 50 GB (SSD рекомендуется)
+- **RAM:** 8 GB (16 GB рекомендуется для игр)
+- **Диск:** Минимум 32 GB (рекомендуется SSD)
 - **GPU:**
-  - NVIDIA GTX 1000+/RTX (полная поддержка + gaming)
+  - NVIDIA GTX 1000+/RTX (полная поддержка + игры)
   - Intel iGPU (базовая поддержка)
   - AMD GPU/APU (в планах)
 
 ### GPU Support
 
-| GPU Type    | Desktop | Gaming | Драйверы         | GameMode | Статус  |
-| ----------- | ------- | ------ | ---------------- | -------- | ------- |
-| NVIDIA dGPU | ✅       | ✅      | nvidia-open-dkms | ✅        | Готово  |
-| Intel iGPU  | ✅       | ⚠️      | mesa             | ❌        | Базовая |
-| AMD dGPU    | ⚠️       | ❌      | -                | ❌        | Planned |
-| AMD APU     | ⚠️       | ❌      | -                | ❌        | Planned |
+| GPU Type    | Desktop | Gaming | Драйверы         | GameMode | Статус   |
+| ----------- | ------- | ------ | ---------------- | -------- | -------- |
+| NVIDIA dGPU | ✅       | ✅      | nvidia-open-dkms | ✅        | Готово   |
+| Intel iGPU  | ✅       | ⚠️      | mesa             | ❌        | Базовая  |
+| AMD dGPU    | ⚠️       | ❌      | -                | ❌        | В планах |
+| AMD APU     | ⚠️       | ❌      | -                | ❌        | В планах |
 
 ---
 
@@ -198,8 +196,7 @@ vv-os/vv-installer/
 ├── assets/               # Ресурсы (обои, иконки)
 ├── lang/                 # Локализация (EN/RU)
 ├── install.sh            # Главный установщик
-├── vv-live-installer.sh  # Wrapper для Live ISO
-└── boot.sh               # Онлайн установщик
+└── vv-live-installer.sh  # Wrapper для Live ISO
 ```
 
 ---

@@ -76,8 +76,6 @@ cd archiso
 sudo ./build.sh
 ```
 
-See [archiso/README.md](archiso/README.md) for detailed instructions.
-
 ---
 
 ## System Requirements
@@ -208,8 +206,7 @@ vv-os/vv-installer/
 ├── assets/               # Resources (wallpapers, icons)
 ├── lang/                 # Localization (EN/RU)
 ├── install.sh            # Main installer
-├── vv-live-installer.sh  # Live ISO wrapper
-└── boot.sh               # Online installer
+└── vv-live-installer.sh  # Live ISO wrapper
 ```
 
 ---
