@@ -36,10 +36,12 @@ if [[ -f "$VV_CONFIGS/systemd/plymouth-quit.service.d/override.conf" ]]; then
   sudo cp "$VV_CONFIGS/systemd/plymouth-quit.service.d/override.conf" /etc/systemd/system/plymouth-quit.service.d/
 fi
 
-# Reload systemd (only outside chroot)
-if [[ -z "${VV_CHROOT_INSTALL:-}" ]]; then
-  systemctl --user daemon-reload
-  sudo systemctl daemon-reload
+# Reload systemd daemon
+sudo systemctl daemon-reload 2>/dev/null || true
+
+# Reload user systemd (only if D-Bus session available - works in installed system, not in chroot)
+if [[ -n "$DBUS_SESSION_BUS_ADDRESS" ]] && [[ -n "$XDG_RUNTIME_DIR" ]]; then
+  systemctl --user daemon-reload 2>/dev/null || true
 fi
 
 # Enable Noctalia service for user
