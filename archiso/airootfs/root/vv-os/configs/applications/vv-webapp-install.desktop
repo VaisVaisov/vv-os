@@ -2,7 +2,7 @@
 Version=1.0
 Name=Install Web App
 Comment=Создать ярлык для webapp (YouTube, Discord, ChatGPT и т.д.)
-Exec=foot --title="Install Web App" -e vv-webapp-install
+Exec=foot --title="Install Web App" -e zsh -l -c vv-webapp-install
 Terminal=false
 Type=Application
 Icon=applications-internet

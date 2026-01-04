@@ -5,6 +5,7 @@ vv-installer/boot.sh
 
 # Claude Code инструкции (не для публичного репо)
 CLAUDE.md
+info-for-claude/
 
 # Dev container (локальная разработка)
 .devcontainer/

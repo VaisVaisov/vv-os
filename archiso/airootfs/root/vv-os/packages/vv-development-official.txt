@@ -1,7 +1,6 @@
 # Development tools
 git
 lazygit
-neovim
 code
 docker
 lazydocker

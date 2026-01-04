@@ -1,6 +1,6 @@
 #!/bin/bash
 # VV OS - AUR Package Search (TUI)
-# Поиск пакетов в Arch User Repository
+# Search packages в Arch User Repository
 
 set -e
 
@@ -23,13 +23,13 @@ else
 fi
 
 # Запрос поискового запроса
-QUERY=$(gum input --placeholder "Введите название пакета для поиска в AUR..." --prompt "🔍 AUR: ")
+QUERY=$(gum input --placeholder "Enter package name для поиска в AUR..." --prompt "🔍 AUR: ")
 
 if [[ -z "$QUERY" ]]; then
     exit 0
 fi
 
-# Поиск пакетов в AUR
+# Search packages в AUR
 gum spin --spinner dot --title "Поиск '$QUERY' в AUR..." -- sleep 0.5
 
 # Получаем список пакетов из AUR
@@ -42,7 +42,7 @@ if [[ -z "$PACKAGES" ]]; then
 fi
 
 # Выбор пакета
-SELECTED=$(echo "$PACKAGES" | gum filter --placeholder "Выберите пакет из AUR...")
+SELECTED=$(echo "$PACKAGES" | gum filter --placeholder "Select package из AUR...")
 
 if [[ -z "$SELECTED" ]]; then
     exit 0
@@ -66,7 +66,7 @@ ACTION=$(gum choose "Установить" "Показать PKGBUILD" "Откр
 
 case "$ACTION" in
     "Установить")
-        gum confirm "Установить $SELECTED из AUR?" && $AUR_HELPER -S --aur "$SELECTED"
+        gum confirm "Install $SELECTED из AUR?" && $AUR_HELPER -S --aur "$SELECTED"
         ;;
     "Показать PKGBUILD")
         # Показываем PKGBUILD через AUR helper

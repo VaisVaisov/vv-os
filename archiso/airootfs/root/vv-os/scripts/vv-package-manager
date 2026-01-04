@@ -1,28 +1,28 @@
 #!/bin/bash
 # VV OS - Package Manager (TUI)
-# Главное меню управления пакетами
+# Main package management menu
 
 set -e
 
-# Проверка зависимостей
+# Check dependencies
 if ! command -v gum &>/dev/null; then
-    notify-send "VV Package Manager" "gum не установлен" -u critical
+    notify-send "VV Package Manager" "gum is not installed" -u critical
     exit 1
 fi
 
 if ! command -v paru &>/dev/null && ! command -v yay &>/dev/null; then
-    notify-send "VV Package Manager" "AUR helper не установлен (paru/yay)" -u critical
+    notify-send "VV Package Manager" "AUR helper is not installed (paru/yay)" -u critical
     exit 1
 fi
 
-# Определяем AUR helper
+# Detect AUR helper
 if command -v paru &>/dev/null; then
     AUR_HELPER="paru"
 else
     AUR_HELPER="yay"
 fi
 
-# Главное меню
+# Main menu
 while true; do
     clear
 
@@ -37,87 +37,87 @@ while true; do
     echo ""
 
     ACTION=$(gum choose \
-        "🔍 Поиск пакетов (Official)" \
-        "🔍 Поиск пакетов (AUR)" \
-        "🔍 Поиск пакетов (Flatpak)" \
-        "⬆️  Обновить систему" \
-        "🪞 Обновить зеркала (rate-mirrors)" \
-        "🧹 Очистить кэш пакетов" \
-        "🗑️  Удалить orphan пакеты" \
-        "📊 Показать установленные пакеты" \
-        "🗑️  Удалить пакет" \
-        "ℹ️  Информация о системе" \
-        "❌ Выход")
+        "🔍 Search packages (Official)" \
+        "🔍 Search packages (AUR)" \
+        "🔍 Search packages (Flatpak)" \
+        "⬆️  Update system" \
+        "🪞 Update mirrors (rate-mirrors)" \
+        "🧹 Clean package cache" \
+        "🗑️  Remove orphan packages" \
+        "📊 Show installed packages" \
+        "🗑️  Remove package" \
+        "ℹ️  System information" \
+        "❌ Exit")
 
     case "$ACTION" in
-        "🔍 Поиск пакетов (Official)")
+        "🔍 Search packages (Official)")
             vv-pacman-search
             ;;
-        "🔍 Поиск пакетов (AUR)")
+        "🔍 Search packages (AUR)")
             vv-aur-search
             ;;
-        "🔍 Поиск пакетов (Flatpak)")
+        "🔍 Search packages (Flatpak)")
             vv-flatpak-search
             ;;
-        "⬆️  Обновить систему")
+        "⬆️  Update system")
             clear
-            gum style --foreground 212 "⬆️  Обновление системы..."
+            gum style --foreground 212 "⬆️  Updating system..."
             echo ""
-            gum confirm "Обновить все пакеты?" && $AUR_HELPER -Syu
+            gum confirm "Update all packages?" && $AUR_HELPER -Syu
             ;;
-        "🪞 Обновить зеркала (rate-mirrors)")
+        "🪞 Update mirrors (rate-mirrors)")
             clear
-            gum style --foreground 213 "🪞 Обновление зеркал через rate-mirrors..."
+            gum style --foreground 213 "🪞 Updating mirrors via rate-mirrors..."
             echo ""
-            gum style --foreground 214 "⚠️  Требуются sudo права"
+            gum style --foreground 214 "⚠️  Requires sudo privileges"
             echo ""
-            if gum confirm "Обновить mirrorlist?"; then
+            if gum confirm "Update mirrorlist?"; then
                 sudo /usr/local/bin/update-mirrors.sh
-                gum style --foreground 46 "✅ Зеркала обновлены!"
+                gum style --foreground 46 "✅ Mirrors updated!"
                 sleep 2
             fi
             ;;
-        "🧹 Очистить кэш пакетов")
+        "🧹 Clean package cache")
             clear
-            gum style --foreground 214 "🧹 Очистка кэша пакетов..."
+            gum style --foreground 214 "🧹 Cleaning package cache..."
             echo ""
 
-            # Показываем размер кэша
+            # Show cache size
             CACHE_SIZE=$(du -sh /var/cache/pacman/pkg 2>/dev/null | cut -f1)
-            gum style "Размер кэша: $CACHE_SIZE"
+            gum style "Cache size: $CACHE_SIZE"
             echo ""
 
-            gum confirm "Очистить кэш пакетов?" && sudo pacman -Scc --noconfirm
-            gum style --foreground 46 "✅ Кэш очищен"
+            gum confirm "Clean package cache?" && sudo pacman -Scc --noconfirm
+            gum style --foreground 46 "✅ Cache cleaned"
             sleep 2
             ;;
-        "🗑️  Удалить orphan пакеты")
+        "🗑️  Remove orphan packages")
             clear
-            gum style --foreground 214 "🗑️  Orphan пакеты (больше не нужные зависимости)"
+            gum style --foreground 214 "🗑️  Orphan packages (no longer needed dependencies)"
             echo ""
 
             ORPHANS=$(pacman -Qtdq 2>/dev/null)
 
             if [[ -z "$ORPHANS" ]]; then
-                gum style --foreground 46 "✅ Orphan пакетов не найдено"
+                gum style --foreground 46 "✅ No orphan packages found"
                 sleep 2
             else
                 ORPHAN_COUNT=$(echo "$ORPHANS" | wc -l)
-                gum style "Найдено orphan пакетов: $ORPHAN_COUNT"
+                gum style "Found orphan packages: $ORPHAN_COUNT"
                 echo ""
                 echo "$ORPHANS" | gum format
                 echo ""
 
-                if gum confirm "Удалить все orphan пакеты?"; then
+                if gum confirm "Remove all orphan packages?"; then
                     sudo pacman -Rns $(pacman -Qtdq) --noconfirm
-                    gum style --foreground 46 "✅ Orphan пакеты удалены"
+                    gum style --foreground 46 "✅ Orphan packages removed"
                     sleep 2
                 fi
             fi
             ;;
-        "📊 Показать установленные пакеты")
+        "📊 Show installed packages")
             clear
-            gum style --foreground 213 "📊 Установленные пакеты"
+            gum style --foreground 213 "📊 Installed packages"
             echo ""
 
             INSTALLED=$(pacman -Qq | wc -l)
@@ -125,51 +125,51 @@ while true; do
             FOREIGN=$(pacman -Qm | wc -l)
 
             gum style \
-                "Всего пакетов: $INSTALLED" \
-                "Явно установленных: $EXPLICIT" \
-                "Из AUR: $FOREIGN"
+                "Total packages: $INSTALLED" \
+                "Explicitly installed: $EXPLICIT" \
+                "From AUR: $FOREIGN"
             echo ""
 
-            gum choose "Показать все пакеты" "Показать явно установленные" "Показать AUR пакеты" "Назад" | {
+            gum choose "Show all packages" "Show explicitly installed" "Show AUR packages" "Back" | {
                 read CHOICE
                 case "$CHOICE" in
-                    "Показать все пакеты")
+                    "Show all packages")
                         pacman -Qq | less
                         ;;
-                    "Показать явно установленные")
+                    "Show explicitly installed")
                         pacman -Qe | less
                         ;;
-                    "Показать AUR пакеты")
+                    "Show AUR packages")
                         pacman -Qm | less
                         ;;
                 esac
             }
             ;;
-        "🗑️  Удалить пакет")
-            PACKAGE=$(pacman -Qq | gum filter --placeholder "Выберите пакет для удаления...")
+        "🗑️  Remove package")
+            PACKAGE=$(pacman -Qq | gum filter --placeholder "Select package to remove...")
             if [[ -n "$PACKAGE" ]]; then
-                gum confirm "Удалить $PACKAGE?" && sudo pacman -Rns "$PACKAGE"
+                gum confirm "Remove $PACKAGE?" && sudo pacman -Rns "$PACKAGE"
             fi
             ;;
-        "ℹ️  Информация о системе")
+        "ℹ️  System information")
             clear
             gum style \
                 --border double \
                 --border-foreground 213 \
                 --padding "1 2" \
                 --margin "1 0" \
-                "ℹ️  Информация о системе"
+                "ℹ️  System information"
             echo ""
 
-            echo "🐧 Дистрибутив: $(cat /etc/os-release | grep PRETTY_NAME | cut -d'=' -f2 | tr -d '\"')"
-            echo "🔧 Версия ядра: $(uname -r)"
+            echo "🐧 Distribution: $(cat /etc/os-release | grep PRETTY_NAME | cut -d'=' -f2 | tr -d '\"')"
+            echo "🔧 Kernel version: $(uname -r)"
             echo "💾 RAM: $(free -h | grep Mem | awk '{print $3 " / " $2}')"
-            echo "💿 Диск: $(df -h / | tail -1 | awk '{print $3 " / " $2 " (" $5 " занято)"}')"
+            echo "💿 Disk: $(df -h / | tail -1 | awk '{print $3 " / " $2 " (" $5 " used)"}')"
             echo ""
 
-            gum input --placeholder "Нажмите Enter для продолжения..." > /dev/null
+            gum input --placeholder "Press Enter to continue..." > /dev/null
             ;;
-        "❌ Выход")
+        "❌ Exit")
             exit 0
             ;;
     esac

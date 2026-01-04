@@ -1,6 +1,6 @@
 #!/bin/bash
 # VV OS - Pacman Package Search (TUI)
-# Поиск пакетов в официальных репозиториях Arch Linux
+# Search packages в официальных репозиториях Arch Linux
 
 set -e
 
@@ -23,13 +23,13 @@ else
 fi
 
 # Запрос поискового запроса
-QUERY=$(gum input --placeholder "Введите название пакета для поиска..." --prompt "🔍 ")
+QUERY=$(gum input --placeholder "Enter package name для поиска..." --prompt "🔍 ")
 
 if [[ -z "$QUERY" ]]; then
     exit 0
 fi
 
-# Поиск пакетов в официальных репозиториях
+# Search packages в официальных репозиториях
 gum spin --spinner dot --title "Поиск '$QUERY' в репозиториях..." -- sleep 0.5
 
 # Получаем список пакетов
@@ -42,7 +42,7 @@ if [[ -z "$PACKAGES" ]]; then
 fi
 
 # Выбор пакета
-SELECTED=$(echo "$PACKAGES" | gum filter --placeholder "Выберите пакет...")
+SELECTED=$(echo "$PACKAGES" | gum filter --placeholder "Select package...")
 
 if [[ -z "$SELECTED" ]]; then
     exit 0
@@ -66,7 +66,7 @@ ACTION=$(gum choose "Установить" "Показать файлы" "Пок
 
 case "$ACTION" in
     "Установить")
-        gum confirm "Установить $SELECTED?" && $AUR_HELPER -S "$SELECTED"
+        gum confirm "Install $SELECTED?" && $AUR_HELPER -S "$SELECTED"
         ;;
     "Показать файлы")
         pacman -Fl "$SELECTED" | less
