@@ -23,12 +23,6 @@ if [[ -d "$VV_CONFIGS/scripts" ]]; then
   sudo chmod +x /usr/local/bin/update-mirrors.sh 2>/dev/null || true
 fi
 
-# Ensure $VV_USER_HOME/.local/bin is in PATH
-touch $VV_USER_HOME/.zshrc
-if ! grep -q 'export PATH="$VV_USER_HOME/.local/bin:$PATH"' $VV_USER_HOME/.zshrc; then
-  echo 'export PATH="$VV_USER_HOME/.local/bin:$PATH"' >> $VV_USER_HOME/.zshrc
-fi
-
 # Install .desktop files for Noctalia launcher
 show_info "$MSG_INSTALL_DESKTOP_FILES"
 mkdir -p $VV_USER_HOME/.local/share/applications

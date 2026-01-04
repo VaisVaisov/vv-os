@@ -17,6 +17,11 @@ export VV_ASSETS="$VV_ROOT/assets"
 export VV_LANG="$VV_ROOT/lang"
 export VV_INSTALL_LOG_FILE="/var/log/vv_install_$(date '+%Y%m%d_%H%M%S').log"
 
+# Detect chroot environment
+if [ "$(stat -c %d:%i /)" != "$(stat -c %d:%i /proc/1/root/.)" ] 2>/dev/null; then
+  export VV_CHROOT_INSTALL=1
+fi
+
 # Add user bin to PATH (for custom scripts)
 export PATH="$HOME/.local/bin:$PATH"
 

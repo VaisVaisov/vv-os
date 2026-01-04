@@ -11,8 +11,10 @@ fi
 
 # Request user data
 show_info "$MSG_ENTER_GIT_DATA"
-GIT_NAME=$(gum input --placeholder "$MSG_GIT_NAME_PROMPT")
-GIT_EMAIL=$(gum input --placeholder "$MSG_GIT_EMAIL_PROMPT")
+show_info "$MSG_GIT_NAME_PROMPT"
+GIT_NAME=$(gum input)
+show_info "$MSG_GIT_EMAIL_PROMPT"
+GIT_EMAIL=$(gum input)
 
 # Configure git config
 git config --global user.name "$GIT_NAME"

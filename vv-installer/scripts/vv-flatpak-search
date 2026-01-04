@@ -1,6 +1,6 @@
 #!/bin/bash
 # VV OS - Flatpak Package Search (TUI)
-# Поиск пакетов в Flathub
+# Search packages в Flathub
 
 set -e
 
@@ -16,13 +16,13 @@ if ! command -v flatpak &>/dev/null; then
 fi
 
 # Запрос поискового запроса
-QUERY=$(gum input --placeholder "Введите название пакета для поиска в Flathub..." --prompt "🔍 Flatpak: ")
+QUERY=$(gum input --placeholder "Enter package name для поиска в Flathub..." --prompt "🔍 Flatpak: ")
 
 if [[ -z "$QUERY" ]]; then
     exit 0
 fi
 
-# Поиск пакетов в Flathub
+# Search packages в Flathub
 gum spin --spinner dot --title "Поиск '$QUERY' в Flathub..." -- sleep 0.5
 
 # Получаем список пакетов из Flathub
@@ -35,7 +35,7 @@ if [[ -z "$PACKAGES" ]]; then
 fi
 
 # Выбор пакета
-SELECTED=$(echo "$PACKAGES" | gum filter --placeholder "Выберите пакет из Flathub...")
+SELECTED=$(echo "$PACKAGES" | gum filter --placeholder "Select package из Flathub...")
 
 if [[ -z "$SELECTED" ]]; then
     exit 0
@@ -59,7 +59,7 @@ ACTION=$(gum choose "Установить" "Показать права" "Отк
 
 case "$ACTION" in
     "Установить")
-        gum confirm "Установить $SELECTED из Flathub?" && flatpak install -y flathub "$SELECTED"
+        gum confirm "Install $SELECTED из Flathub?" && flatpak install -y flathub "$SELECTED"
         ;;
     "Показать права")
         flatpak info --show-permissions "$SELECTED" 2>/dev/null || \

@@ -5,3 +5,4 @@ sddm-astronaut-theme
 gtk-cyberpunk-neon-theme-git
 nerd-fonts-inter
 ttf-icomoon-feather
+bibata-cursor-theme

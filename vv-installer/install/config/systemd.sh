@@ -36,6 +36,13 @@ if [[ -f "$VV_CONFIGS/systemd/plymouth-quit.service.d/override.conf" ]]; then
   sudo cp "$VV_CONFIGS/systemd/plymouth-quit.service.d/override.conf" /etc/systemd/system/plymouth-quit.service.d/
 fi
 
+# Install logind configuration (ignore power button for NS to handle it)
+if [[ -d "$VV_CONFIGS/systemd/logind.conf.d" ]]; then
+  sudo mkdir -p /etc/systemd/logind.conf.d
+  sudo cp -r "$VV_CONFIGS/systemd/logind.conf.d/"* /etc/systemd/logind.conf.d/
+  show_success "logind.conf.d configuration installed"
+fi
+
 # Reload systemd daemon
 sudo systemctl daemon-reload 2>/dev/null || true
 
@@ -68,15 +75,33 @@ fi
 show_info "Enabling power management services..."
 
 # ACPI daemon (for power button, lid close events)
-if command -v acpid &> /dev/null; then
+if pacman -Q acpid &> /dev/null; then
   sudo systemctl enable acpid.service
   show_success "acpid.service enabled"
 fi
 
 # TLP power management (for laptops)
-if command -v tlp &> /dev/null; then
+if pacman -Q tlp &> /dev/null; then
   sudo systemctl enable tlp.service
   show_success "tlp.service enabled"
+fi
+
+# UPower (battery monitoring)
+if pacman -Q upower &> /dev/null; then
+  sudo systemctl enable upower.service
+  show_success "upower.service enabled"
+fi
+
+# NetworkManager (network management)
+if pacman -Q networkmanager &> /dev/null; then
+  sudo systemctl enable NetworkManager.service
+  show_success "NetworkManager.service enabled"
+fi
+
+# Bluetooth
+if pacman -Q bluez &> /dev/null; then
+  sudo systemctl enable bluetooth.service
+  show_success "bluetooth.service enabled"
 fi
 
 show_success "$MSG_SYSTEMD_OK"

@@ -19,9 +19,12 @@ p7zip
 zip
 pacman-contrib
 gum
+neovim
+tinyxxd
 
-# Power management (ACPI + TLP)
+# Power management (ACPI + TLP + UPower)
 acpi
 acpid
 tlp
 tlp-pd
+upower
