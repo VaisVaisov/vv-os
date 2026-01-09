@@ -38,6 +38,9 @@ tmp/
 temp/
 cache/
 
+# Pre-release папки (локальные тесты)
+VV*pre-release/
+
 # Логи установки
 /var/log/vv-install.log
 /var/log/update-mirrors.log

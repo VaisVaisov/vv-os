@@ -21,6 +21,8 @@ pacman-contrib
 gum
 neovim
 tinyxxd
+rsync
+fastfetch
 
 # Power management (ACPI + TLP + UPower)
 acpi

@@ -4,3 +4,5 @@ ufw
 gufw
 bluez
 bluez-utils
+bluez-qt
+qt6-connectivity

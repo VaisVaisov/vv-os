@@ -1,0 +1,9 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "origin"]
+	url = https://github.com/Keyitdev/sddm-astronaut-theme
+	tagOpt = --no-tags
+	fetch = +refs/*:refs/*
+	mirror = true

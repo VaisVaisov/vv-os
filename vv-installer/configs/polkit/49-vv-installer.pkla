@@ -1,0 +1,6 @@
+[Allow live user to run installer]
+Identity=unix-user:live
+Action=org.freedesktop.policykit.exec
+ResultAny=yes
+ResultInactive=yes
+ResultActive=yes

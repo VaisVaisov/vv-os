@@ -4,6 +4,10 @@
 
 set -eEo pipefail
 
+if [ "$EUID" -ne 0 ]; then
+  exec pkexec "$0" "$@"
+fi
+
 # ============================================================================
 # Cyberpunk Color Scheme (gum style colors)
 # ============================================================================
@@ -56,27 +60,18 @@ check_internet() {
   info "$(cat <<EOF
       📡 HOW TO CONNECT TO INTERNET
 
-      WiFi:
-      1. iwctl
-      2. station wlan0 scan
-      3. station wlan0 get-networks
-      4. station wlan0 connect "Your-WiFi-Name"
-      5. exit
-
-      Wired (Ethernet):
-        • Usually connects automatically (DHCP)
-        • If not: dhcpcd
-
-      Check connection:
-        • ping archlinux.org
-        • ip a (check if you have an IP address)
-
-      After connecting, run this installer again. (just type "exit" and push Enter)
+      Open terminal: Super + Enter
+      Check status NetworkManager: systemctl status NetworkManager
+      If it turned off, turn on it: sudo systemctl start NetworkManager
+      Check connection in Noctalia's Control Center (Super + A), or NetworkManager's TUI (nmtui), or NetworkManager's CLI (nmcli)
+      After then, just restart the installer via Noctalia's launcher (Super + Space)
 EOF
 )"
 
     echo ""
-  exit 1
+    gum style --foreground "$C_ACCENT" "Press Enter to exit..."
+    read -r
+    exit 0
 }
 
 install_dependencies() {
@@ -192,8 +187,9 @@ EOF
   subtitle "VV OS will finish setup on first boot"
   success "Base Arch Linux system installed"
   echo ""
-  gum style --foreground "$C_ACCENT" "Press ENTER to reboot..."
+  gum style --foreground "$C_ACCENT" "Press Enter to reboot..."
   read -r
+  rm -rf "/mnt/root/vv-os"
   reboot
 }
 

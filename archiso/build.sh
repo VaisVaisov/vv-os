@@ -62,6 +62,17 @@ rsync -a \
   "$PROFILE_DIR/../vv-installer/" \
   "$PROFILE_DIR/airootfs/root/vv-os/"
 
+# Установка скриптов в систему
+mkdir -p "$PROFILE_DIR/airootfs/usr/local/bin"
+cp "$PROFILE_DIR/airootfs/root/vv-os/vv-live-installer.sh" "$PROFILE_DIR/airootfs/usr/local/bin/"
+chmod +x "$PROFILE_DIR/airootfs/usr/local/bin/vv-live-installer.sh"
+
+# === POLKIT: Allow live user to run installer without password ===
+echo "→ Настройка polkit для запуска установщика..."
+mkdir -p "$PROFILE_DIR/airootfs/etc/polkit-1/localauthority/50-local.d/"
+cp "$PROFILE_DIR/../vv-installer/configs/polkit/49-vv-installer.pkla" \
+   "$PROFILE_DIR/airootfs/etc/polkit-1/localauthority/50-local.d/"
+
 # Установка прав на выполнение для всех .sh файлов
 echo "→ Установка прав на выполнение для скриптов..."
 find "$PROFILE_DIR/airootfs/root/vv-os" -type f -name "*.sh" -exec chmod +x {} \;

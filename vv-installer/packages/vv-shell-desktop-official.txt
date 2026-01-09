@@ -7,3 +7,4 @@ qt5-wayland
 qt6-wayland
 qt6-multimedia-ffmpeg
 qt6-virtualkeyboard
+clipist

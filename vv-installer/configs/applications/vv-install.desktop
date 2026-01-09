@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Install VV OS
+Comment=Cyberpunk Arch Linux Installer
+Exec=foot --title "VV OS Installer" -e /usr/local/bin/vv-live-installer.sh
+Icon=vv-os
+Terminal=false
+Type=Application
+Categories=System;Settings;
+Keywords=install;gaming;arch;
+StartupNotify=true
