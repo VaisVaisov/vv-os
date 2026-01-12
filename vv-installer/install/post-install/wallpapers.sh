@@ -15,7 +15,7 @@ else
   show_info "$MSG_WALLPAPERS_NOT_FOUND"
 fi
 
-# Fix ownership before running matugen
-chown -R "$VV_USER:$VV_USER" $VV_USER_HOME/Pictures/Wallpapers
+# Fix ownership (Pictures directory and all subdirectories)
+chown -R "$VV_USER:$VV_USER" $VV_USER_HOME/Pictures
 
 show_success "$MSG_WALLPAPERS_OK"

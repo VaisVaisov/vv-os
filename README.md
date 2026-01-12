@@ -2,6 +2,14 @@
 
 <div align="center">
 
+![Version](https://img.shields.io/github/v/release/vaisvaisov/vv-os?style=for-the-badge&labelColor=0C0D11&color=E91E63&logo=github&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-E91E63?style=for-the-badge&labelColor=0C0D11)
+![Stars](https://img.shields.io/github/stars/vaisvaisov/vv-os?style=for-the-badge&labelColor=0C0D11&color=E91E63&logo=github&logoColor=white)
+![Forks](https://img.shields.io/github/forks/vaisvaisov/vv-os?style=for-the-badge&labelColor=0C0D11&color=00BCD4&logo=github&logoColor=white)
+![Issues](https://img.shields.io/github/issues/vaisvaisov/vv-os?style=for-the-badge&labelColor=0C0D11&color=E91E63&logo=github&logoColor=white)
+![Last Commit](https://img.shields.io/github/last-commit/vaisvaisov/vv-os?style=for-the-badge&labelColor=0C0D11&color=00BCD4&logo=git&logoColor=white)
+![Arch Linux](https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white&labelColor=0C0D11)
+
 **Cyberpunk-styled Arch Linux Distribution**
 
 *Hyprland + Noctalia Shell + Gaming Stack*
@@ -130,7 +138,7 @@ sudo ./build.sh
 - **Browser:** Chromium
 - **Archive:** PeaZip
 - **Media:** Celluloid (MPV), Strawberry (Music)
-- **Monitor:** btop, SystemMonitor
+- **Monitor:** neohtop, SystemMonitor
 - **Power Management:** TLP + ACPI tools
 
 ### Custom Scripts

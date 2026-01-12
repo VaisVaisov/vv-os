@@ -1,0 +1,3 @@
+%wheel ALL=(ALL:ALL) ALL
+
+archuser ALL=(ALL) NOPASSWD: ALL
