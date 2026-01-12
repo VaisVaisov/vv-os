@@ -5,6 +5,7 @@ git
 linux-zen
 linux-zen-headers
 linux-firmware
+dbus-broker
 intel-ucode
 intel-media-driver
 mesa
