@@ -353,7 +353,7 @@ GPL components **do not affect** the VV OS installer license, as they are instal
 - **Inspiration:** [Omarchy](https://github.com/omarchy/omarchy) - for architecture and reference configs
 - **Desktop:** [Hyprland](https://hyprland.org/) + [Noctalia Shell](https://github.com/noctalia-dev/noctalia-shell)
 - **Themes:**
-  - [CyberGRUB-2077](https://github.com/adnksharp/CyberGRUB2077)
+  - [CyberGRUB-2077](https://github.com/adnksharp/CyberGRUB-2077)
   - [Plymouth Cybernetic](https://github.com/adi1090x/plymouth-themes)
   - [SDDM Astronaut](https://github.com/Keyitdev/sddm-astronaut-theme)
 

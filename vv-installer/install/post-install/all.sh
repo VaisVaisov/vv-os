@@ -9,6 +9,7 @@ run_logged "$VV_INSTALL/post-install/monitors-setup.sh"
 run_logged "$VV_INSTALL/post-install/firewall-setup.sh"
 run_logged "$VV_INSTALL/post-install/git-setup.sh"
 run_logged "$VV_INSTALL/post-install/flatpak-setup.sh"
+run_logged "$VV_INSTALL/post-install/snapper-setup.sh"
 run_logged "$VV_INSTALL/post-install/finished.sh"
 
 stop_install_log

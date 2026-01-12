@@ -1,0 +1,67 @@
+#!/bin/bash
+# VV Snapshot Restore Prompt
+# Shows notification and prompts user to restore snapshot
+
+NOTIFY_FILE="/tmp/vv-snapshot-restore-needed"
+
+# Check if booted from snapshot
+if [[ ! -f "$NOTIFY_FILE" ]]; then
+  exit 0
+fi
+
+# Load snapshot info
+source "$NOTIFY_FILE"
+
+# Wait for display server to be ready
+sleep 3
+
+# Check if in Wayland session
+if [[ -n "$WAYLAND_DISPLAY" ]]; then
+  # Show notification
+  notify-send -u critical \
+    "⚠️ Booted from Snapshot" \
+    "You are running from snapshot #${SNAPSHOT_NUM}: ${SNAPSHOT_DESC}\n\nTo make this permanent, restore the snapshot using VV Snapper Manager."
+
+  # Wait a bit before showing dialog
+  sleep 2
+
+  # Show interactive prompt
+  if command -v gum &>/dev/null; then
+    CHOICE=$(gum choose \
+      --header "You booted from snapshot #${SNAPSHOT_NUM}
+
+This is a temporary boot. Choose an action:" \
+      "🔄 Restore snapshot (make permanent)" \
+      "📋 Open Snapper Manager" \
+      "❌ Ignore (keep temporary)" \
+      "🔁 Reboot to main system")
+
+    case "$CHOICE" in
+      "🔄 Restore snapshot (make permanent)")
+        foot -e sudo snapper -c root rollback "$SNAPSHOT_NUM"
+        notify-send "✓ Snapshot Restored" "Snapshot #${SNAPSHOT_NUM} is now permanent. Reboot recommended."
+        ;;
+      "📋 Open Snapper Manager")
+        foot -e sudo vv-snapper-manager
+        ;;
+      "🔁 Reboot to main system")
+        systemctl reboot
+        ;;
+      *)
+        # Ignore - do nothing
+        ;;
+    esac
+  else
+    # Fallback to zenity if gum not available
+    zenity --question \
+      --title="Booted from Snapshot" \
+      --text="You are running from snapshot #${SNAPSHOT_NUM}: ${SNAPSHOT_DESC}\n\nThis is temporary. Do you want to restore it permanently?" \
+      --ok-label="Restore" \
+      --cancel-label="Ignore"
+
+    if [[ $? -eq 0 ]]; then
+      foot -e sudo snapper -c root rollback "$SNAPSHOT_NUM"
+      notify-send "✓ Snapshot Restored" "Snapshot #${SNAPSHOT_NUM} is now permanent. Reboot recommended."
+    fi
+  fi
+fi

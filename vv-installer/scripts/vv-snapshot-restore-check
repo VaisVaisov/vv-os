@@ -1,0 +1,32 @@
+#!/bin/bash
+# VV Snapshot Restore Check
+# Detects if booted from snapshot and prompts user to restore
+
+# Check if running from snapshot
+CURRENT_SUBVOL=$(btrfs subvolume show / 2>/dev/null | grep "Name:" | awk '{print $2}')
+
+# Check if current subvolume is a snapshot
+if [[ "$CURRENT_SUBVOL" =~ \.snapshots/[0-9]+/snapshot ]]; then
+  # Extract snapshot number
+  SNAPSHOT_NUM=$(echo "$CURRENT_SUBVOL" | grep -oP '\.snapshots/\K[0-9]+')
+
+  # Get snapshot description
+  SNAPSHOT_DESC=$(snapper -c root list | grep "^\s*${SNAPSHOT_NUM}\s" | awk -F'|' '{print $5}' | xargs)
+
+  # Create notification file for user session
+  NOTIFY_FILE="/tmp/vv-snapshot-restore-needed"
+  cat > "$NOTIFY_FILE" <<EOF
+SNAPSHOT_NUM=$SNAPSHOT_NUM
+SNAPSHOT_DESC=$SNAPSHOT_DESC
+EOF
+  chmod 644 "$NOTIFY_FILE"
+
+  # Log detection
+  logger -t vv-snapshot "Booted from snapshot #$SNAPSHOT_NUM: $SNAPSHOT_DESC"
+
+  exit 0
+else
+  # Not booted from snapshot, remove notification file if exists
+  rm -f /tmp/vv-snapshot-restore-needed
+  exit 0
+fi

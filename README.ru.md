@@ -342,7 +342,7 @@ GPL компоненты **не влияют** на лицензию VV OS insta
 - **Inspiration:** [Omarchy](https://github.com/basecamp/omarchy) - за архитектуру и референсные конфиги
 - **Desktop:** [Hyprland](https://hyprland.org/) + [Noctalia Shell](https://github.com/noctalia-dev/noctalia-shell)
 - **Themes:**
-  - [CyberGRUB-2077](https://github.com/adnksharp/CyberGRUB2077)
+  - [CyberGRUB-2077](https://github.com/adnksharp/CyberGRUB-2077)
   - [Plymouth Cybernetic](https://github.com/adi1090x/plymouth-themes)
   - [SDDM Astronaut](https://github.com/Keyitdev/sddm-astronaut-theme)
 

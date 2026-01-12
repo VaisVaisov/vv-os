@@ -1,0 +1,14 @@
+[Unit]
+Description=VV Snapshot Boot Detection
+DefaultDependencies=no
+After=local-fs.target
+Before=sysinit.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/vv-snapshot-restore-check
+RemainAfterExit=yes
+StandardOutput=journal
+
+[Install]
+WantedBy=sysinit.target

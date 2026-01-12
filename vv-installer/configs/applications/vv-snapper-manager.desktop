@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=VV Snapper Manager
+Comment=Manage system snapshots (Btrfs)
+Exec=foot -e sudo vv-snapper-manager
+Icon=drive-harddisk-system
+Terminal=false
+Type=Application
+Categories=System;Settings;
+Keywords=snapshot;backup;restore;btrfs;snapper;rollback;

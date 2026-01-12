@@ -32,7 +32,7 @@ if [[ -d "$VV_CONFIGS/applications" ]]; then
   chmod 644 $VV_USER_HOME/.local/share/applications/vv-*.desktop 2>/dev/null || true
 
   # Fix script paths to absolute paths (required for NS launcher)
-  for script in vv-package-manager vv-aur-search vv-flatpak-search vv-pacman-search vv-tui-install vv-webapp-install; do
+  for script in vv-package-manager vv-aur-search vv-flatpak-search vv-pacman-search vv-tui-install vv-webapp-install vv-snapper-manager; do
     if [[ -f "$VV_USER_HOME/.local/share/applications/$script.desktop" ]]; then
       sed -i "s| $script| $VV_USER_HOME/.local/bin/$script|g" "$VV_USER_HOME/.local/share/applications/$script.desktop"
     fi
