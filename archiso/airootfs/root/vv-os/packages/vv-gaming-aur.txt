@@ -1,4 +1,0 @@
-# Games and emulators
-steamtinkerlaunch
-xmcl-launcher
-an-anime-game-launcher-bin

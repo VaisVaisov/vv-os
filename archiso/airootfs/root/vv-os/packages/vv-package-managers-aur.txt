@@ -1,5 +1,0 @@
-# AUR helpers (yay installed manually in aur-helper.sh, paru via yay)
-paru
-
-# AUR package utilities
-rate-mirrors-bin

@@ -1,9 +1,0 @@
-# Shell and desktop environment
-sddm
-plymouth
-polkit-kde-agent
-xdg-desktop-portal-hyprland
-qt5-wayland
-qt6-wayland
-qt6-multimedia-ffmpeg
-qt6-virtualkeyboard

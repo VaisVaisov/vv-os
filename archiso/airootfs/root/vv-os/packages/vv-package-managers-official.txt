@@ -1,2 +1,0 @@
-# Package managers from official repositories
-flatpak

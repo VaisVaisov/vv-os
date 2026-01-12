@@ -1,2 +1,0 @@
-# Media applications
-peazip-qt-bin

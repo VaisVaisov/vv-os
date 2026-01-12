@@ -1,6 +1,0 @@
-# Network and Bluetooth
-networkmanager
-ufw
-gufw
-bluez
-bluez-utils

@@ -1,9 +1,0 @@
-#!/bin/zsh
-
-# Запуск TUI приложения в терминале
-# Адаптировано из Omarchy для VV Shell
-
-APP_ID="org.vv.$(basename $1)"
-
-# Запускаем через терминал (foot) с app-id
-exec setsid foot --app-id="$APP_ID" -e "$1" "${@:2}"

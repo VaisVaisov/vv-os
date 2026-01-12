@@ -1,3 +1,0 @@
-# Terminal and shell
-foot
-zsh

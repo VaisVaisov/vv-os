@@ -1,8 +1,0 @@
-# Bootloader and filesystem
-grub
-grub-btrfs
-efibootmgr
-os-prober
-btrfs-progs
-snapper
-snap-pac

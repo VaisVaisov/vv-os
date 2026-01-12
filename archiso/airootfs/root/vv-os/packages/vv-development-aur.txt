@@ -1,5 +1,0 @@
-# Development tools
-docker-desktop
-claude-code
-claude-desktop
-claude-desktop-debug

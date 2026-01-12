@@ -2,6 +2,7 @@
 	repositoryformatversion = 0
 	filemode = true
 	bare = true
+	ignorecase = true
 [remote "origin"]
 	url = https://github.com/noctalia-dev/noctalia-shell.git
 	tagOpt = --no-tags

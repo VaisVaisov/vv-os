@@ -1,4 +1,0 @@
-# NVIDIA drivers (optional)
-nvidia-open-dkms
-nvidia-utils
-nvidia-settings

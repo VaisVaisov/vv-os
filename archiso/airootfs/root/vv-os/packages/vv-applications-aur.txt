@@ -1,4 +1,0 @@
-# User applications
-yandex-music
-anytype-bin
-happ-desktop-bin

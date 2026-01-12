@@ -2,9 +2,17 @@
 
 # Base system
 base
+base-devel
 linux-firmware
 sof-firmware
 polkit
+
+# Explicit providers to prevent interactive prompts
+iptables-nft
+noto-fonts
+pipewire-jack
+qt6-multimedia-ffmpeg
+gnu-free-fonts
 
 # Archiso
 archiso
@@ -13,7 +21,7 @@ mkinitcpio-nfs-utils
 nbd
 pv
 
-# Ядро
+# Kernel
 linux-zen
 linux-zen-headers
 
@@ -29,7 +37,7 @@ edk2-shell
 # Network
 iwd
 dhcpcd
-wpa_supplicant
+networkmanager
 reflector
 openssh
 wget
@@ -55,13 +63,42 @@ less
 python
 
 # Utilities
-nano
 vim
-man-db
-man-pages
 bash-completion
+
+# Display Manager & Multimedia
+sddm
+ffmpeg
+libva-utils
+vulkan-icd-loader
+
+# Plymouth
+plymouth
+
+# Video drivers & Graphics Stack
+mesa
+vulkan-intel
+vulkan-radeon
+nvidia-open-dkms
+nvidia-utils
+
+# Hyprland and dependencies
+hyprland
+wayland
+cliphist
+wl-clipboard
+xorg-server-xwayland
+xdg-desktop-portal-hyprland
+foot
+qt6-wayland
 
 # Optional but useful
 htop
 mc
 dialog
+
+# AUR packages (Custom Local Repo)
+gpu-screen-recorder
+noctalia-shell-git
+sddm-astronaut-theme
+plymouth-themes-adi1090x-git

@@ -1,10 +1,39 @@
 # VV OS Architecture
 
-Архитектура VV OS installer - подробное описание процесса установки и структуры проекта.
+Архитектура VV OS - подробное описание процесса сборки ISO и установки системы.
 
 ---
 
 ## Обзор
+
+VV OS состоит из двух основных компонентов:
+
+1. **ISO Builder** (`archiso/build.sh`) - сборка Live ISO с GUI
+2. **System Installer** (`vv-live-installer.sh` + `install.sh`) - установка системы
+
+### ISO Builder Process
+
+```
+┌─────────────────────────────────────┐
+│   archiso/build.sh                  │
+│   - Очистка старых файлов           │
+│   - Сборка AUR пакетов              │
+│   - Создание локального репозитория │
+│   - Патч SDDM темы (cyberpunk)      │
+│   - Сборка ISO через mkarchiso      │
+└─────────────┬───────────────────────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│   vv-os-YYYY.MM.DD-x86_64.iso       │
+│   - GUI Live environment            │
+│   - Hyprland + Noctalia Shell       │
+│   - SDDM с автологином              │
+│   - Установщик в /root/vv-os/       │
+└─────────────────────────────────────┘
+```
+
+### System Installation Process
 
 VV OS использует **двухэтапную установку**:
 
