@@ -57,7 +57,7 @@ Boot into a fully functional GUI Live environment straight from the ISO—try it
 
 3. **Try or Install**:
    - **Try first**: Boots into Hyprland with autologin—explore the system!
-   - **Ready to install?**: Launch "Install VV OS" from desktop or run:
+   - **Ready to install?**: Launch "Install VV OS" from Noctalia Launcher (rocket button top-left or SUPER+Space) or run:
      ```bash
      sudo vv-live-installer.sh
      ```
@@ -152,7 +152,7 @@ Run these from terminal:
 
 ### First Boot
 
-1. **Login**: SDDM autologin takes you straight to Hyprland
+1. **Login**: SDDM takes you straight to Hyprland
 2. **Wait 1-2 minutes**: First launch generates Material 3 themes from wallpaper
 
 ### Quick Setup
@@ -169,7 +169,7 @@ Run these from terminal:
 - `Super + F` → File Manager
 - `Super + B` → Browser
 - `Super + N` → Neovim
-- `Super + T` → Task Manager
+- `Super + T` → System Monitor
 
 **Windows**:
 - `Super + Q` → Close window
@@ -213,11 +213,33 @@ Use `prime-launcher` to force dedicated GPU:
 
 ## Roadmap
 
-### v2.0.0: Custom GUI Installer
-- Beautiful cyberpunk-themed graphical installer (custom-built, not Calamares)
-- "Try before install" live environment
-- Multi-language support out of the box
+### v1.1.x: Custom GUI Installer
+- Beautiful cyberpunk-themed graphical installer (Python + PySide6)
 - Package selection with checkboxes
+- Multi-language support
+- "Try before install" live environment
+
+### v2.0.0: Major Update - VV OS for Android
+- LineageOS-based custom ROM with cyberpunk aesthetics
+- Gaming optimizations for mobile devices
+- Desktop ↔ Android synchronization via **VV Connect**
+- Turn old phones into retro gaming consoles
+
+#### VV Connect - Desktop ↔ Android Synchronization
+
+A full-featured [KDE Connect](https://kdeconnect.kde.org/) analog for the VV OS ecosystem with cyberpunk UI. Seamlessly connect your VV OS Desktop and Android devices:
+
+- **Clipboard Sync**: Copy on phone → paste on PC (with cliphist history sync)
+- **File Transfer**: Share files between devices with cyberpunk UI
+- **Notifications**: Android notifications appear on Desktop
+- **Media Control**: Control RetroArch/music on PC from your phone
+- **Remote Input**: Use phone as touchpad/keyboard
+- **SMS Integration**: Send SMS from Desktop
+- **Battery Monitor**: View phone battery status on PC
+- **Theme Sync**: Material 3 themes sync across devices (pick wallpaper → applies everywhere)
+- **Config Sync**: Synchronize configurations between Desktop and Android
+
+Alternative name under consideration: **VV Sync**
 
 ### Future Plans
 
@@ -225,7 +247,6 @@ Use `prime-launcher` to force dedicated GPU:
 - **Intel iGPU Gaming**: Gaming optimizations for Intel integrated graphics
 - **VV ROM Manager**: RetroArch ROM downloader with Myrient API integration
 - **OTA Updates**: Custom pacman repository for config updates
-- **VV OS for Android**: Turn old phones into retro gaming consoles (long-term vision)
 
 ---
 
@@ -257,7 +278,7 @@ Help us make VV OS better! We especially need:
 
 ## License
 
-**MIT License** — Copyright © 2025 Vais Vaisov
+**MIT License** — Copyright © 2025-2026 Vais Vaisov
 
 Free to use, modify, and distribute commercially or privately.
 

@@ -80,6 +80,14 @@ echo "→ Копирование vv-os в ISO..."
 rsync -a \
   --exclude archiso \
   --exclude .git \
+  --exclude '*/noctalia-shell/' \
+  --exclude '*/plymouth-themes/' \
+  --exclude '*/sddm-astronaut-theme/' \
+  --exclude '*/gpu-screen-recorder/' \
+  --exclude '*/rate-mirrors-bin/' \
+  --exclude '*.pkg.tar.zst' \
+  --exclude '*/src/' \
+  --exclude '*/pkg/' \
   "$PROFILE_DIR/../vv-installer/" \
   "$PROFILE_DIR/airootfs/root/vv-os/"
 
@@ -107,6 +115,7 @@ AUR_PKGS=(
   "noctalia-shell-git"
   "sddm-astronaut-theme"
   "plymouth-themes-adi1090x-git"
+  "rate-mirrors-bin"
 )
 
 echo "→ Сборка пакетов из AUR..."
@@ -184,6 +193,13 @@ cat "$PROFILE_DIR/pacman.conf" > "$TEMP_CONF"
 # Используем realpath для гарантированного доступа в chroot
 REAL_REPO_DIR="$(realpath "$REPO_DIR")"
 sed -i "1i [vv-os]\nSigLevel = Optional TrustAll\nServer = file://$REAL_REPO_DIR\n" "$TEMP_CONF"
+
+# Очистка build-артефактов AUR пакетов (экономия места на диске)
+echo "→ Очистка build-артефактов AUR пакетов..."
+for pkg in "${AUR_PKGS[@]}"; do
+  sudo rm -rf "$PROFILE_DIR/airootfs/root/vv-os/$pkg"
+  echo "    ✅ Очищен $pkg"
+done
 
 # Сборка ISO
 echo ""

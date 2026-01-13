@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Install VV OS
-Exec=foot -e sudo /root/vv-os/vv-live-installer.sh
+Exec=foot -e sudo bash vv-live-installer.sh
 Icon=vv-os-icon
 Terminal=false
 Categories=System;

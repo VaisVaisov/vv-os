@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Update pacman mirrors
+Exec=foot -e sudo bash update-mirrors.sh
+Icon=system-software-install
+Terminal=false
+Categories=System;
+

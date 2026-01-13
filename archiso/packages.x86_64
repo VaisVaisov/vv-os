@@ -38,7 +38,6 @@ edk2-shell
 iwd
 dhcpcd
 networkmanager
-reflector
 openssh
 wget
 curl
@@ -81,6 +80,8 @@ vulkan-intel
 vulkan-radeon
 nvidia-open-dkms
 nvidia-utils
+lib32-nvidia-utils
+lib32-vulkan-icd-loader
 
 # Hyprland and dependencies
 hyprland
@@ -102,3 +103,4 @@ gpu-screen-recorder
 noctalia-shell-git
 sddm-astronaut-theme
 plymouth-themes-adi1090x-git
+rate-mirrors-bin
