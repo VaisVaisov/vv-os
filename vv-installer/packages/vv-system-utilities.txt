@@ -1,6 +1,7 @@
 # System utilities
 # Filesystems
-ntfs-3g
+# Note: ntfs3 driver is built into Linux kernel (5.15+), no package needed
+# Usage: mount -t ntfs3 /dev/sdX /mnt
 
 # System management
 brightnessctl
@@ -23,6 +24,7 @@ neovim
 tinyxxd
 rsync
 fastfetch
+nwg-look
 
 # Power management (ACPI + TLP + UPower)
 acpi
@@ -30,3 +32,6 @@ acpid
 tlp
 tlp-pd
 upower
+
+# Security (AppArmor)
+apparmor

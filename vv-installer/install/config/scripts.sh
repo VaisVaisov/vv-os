@@ -21,6 +21,9 @@ if [[ -d "$VV_CONFIGS/scripts" ]]; then
 
   sudo chmod +x /usr/local/bin/prime-launcher 2>/dev/null || true
   sudo chmod +x /usr/local/bin/update-mirrors.sh 2>/dev/null || true
+
+  # Create symlinks without .sh extension (cosmetic improvement)
+  sudo ln -sf /usr/local/bin/update-mirrors.sh /usr/local/bin/update-mirrors 2>/dev/null || true
 fi
 
 # Install .desktop files for Noctalia launcher

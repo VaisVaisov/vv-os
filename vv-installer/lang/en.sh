@@ -35,10 +35,17 @@ MSG_INSTALL_SHELL_OFFICIAL="Installing official shell packages..."
 MSG_INSTALL_SHELL_AUR="Installing Hyprland stack from AUR..."
 MSG_SHELL_OK="Hyprland + Noctalia Shell installed"
 MSG_INSTALL_GAMING="Installing gaming packages..."
+MSG_GAMING_SELECT_PACKAGES="Select gaming packages to install (use Space to select, Enter to confirm):"
+MSG_GAMING_INSTALL_ALL="Installing all gaming packages..."
+MSG_GAMING_INSTALL_SELECTED="Installing selected gaming packages..."
 MSG_GAMING_OK="Gaming packages installed"
 MSG_SKIP_GAMING="Skipping gaming packages"
 MSG_INSTALL_ADDITIONAL_APPS="Installing additional applications..."
 MSG_INSTALL_APPS="Installing applications..."
+MSG_APPS_SELECT_PACKAGES="Select packages to install (use Space to select, Enter to confirm) -"
+MSG_APPS_INSTALL_ALL="Installing all packages from category"
+MSG_APPS_INSTALL_SELECTED="Installing selected packages from category"
+MSG_APPS_SKIP_CATEGORY="Skipping category"
 MSG_APPS_OK="Applications installed"
 MSG_CATEGORY_APPLICATIONS="Applications"
 MSG_CATEGORY_DEVELOPMENT="Development"
@@ -223,6 +230,8 @@ MSG_FIREWALL_ALLOW_SSH="Allowing SSH (22/tcp)..."
 MSG_FIREWALL_ALLOW_HTTPS="Allowing HTTPS (443/tcp)..."
 MSG_FIREWALL_ALLOW_WIREGUARD="Allowing WireGuard VPN (51820/udp)..."
 MSG_FIREWALL_ALLOW_AMNEZIAWG="Allowing AmneziaWG VPN (55424/udp)..."
+MSG_FIREWALL_HAPP_DETECTED="Happ VPN detected! Automatically configuring firewall rules..."
+MSG_FIREWALL_HAPP_CONFIGURED="Happ VPN firewall rules configured (tun0 interface allowed)"
 MSG_FIREWALL_ALLOW_SHADOWSOCKS="Allowing Shadowsocks (8388/tcp+udp)..."
 MSG_FIREWALL_ALLOW_MTPROTO="Allowing MTProto proxy (443/tcp)..."
 MSG_FIREWALL_ALLOW_TORRENTS="Allowing torrent ports (49152-65535/tcp+udp)..."
@@ -235,6 +244,11 @@ MSG_FIREWALL_CUSTOM_PORT="Enter the port number:"
 MSG_FIREWALL_CUSTOM_PROTOCOL="Enter the protocol (tcp/udp):"
 MSG_FIREWALL_CUSTOM_DESC="Enter a description for this rule:"
 MSG_FIREWALL_CUSTOM_APPLY="Applying custom port rule..."
+MSG_FIREWALL_ENABLE_SERVICE="Enabling UFW service on boot..."
+MSG_FIREWALL_CONFIGURE_XHOST="Configuring xhost for gufw GUI on Wayland..."
+MSG_FIREWALL_XHOST_CONFIGURED="xhost configured in Hyprland autostart"
+MSG_FIREWALL_XHOST_ALREADY="xhost already configured"
+MSG_FIREWALL_HYPR_NOT_FOUND="Hyprland autostart.conf not found, skipping xhost setup"
 
 # AUR Installation
 MSG_AUR_BUILDING="Building AUR package:"
@@ -296,3 +310,137 @@ MSG_SNAPPER_REGEN_GRUB="Regenerating GRUB menu with snapshots..."
 MSG_SNAPPER_GRUB_UPDATED="GRUB menu updated (snapshots available at boot)"
 MSG_SNAPPER_LIST="Current snapshots:"
 MSG_SNAPPER_OK="Snapper configured successfully"
+MSG_SNAPPER_ADDING_FSTAB="Adding /.snapshots to /etc/fstab for GRUB boot support..."
+MSG_SNAPPER_FSTAB_ADDED="Added /.snapshots to /etc/fstab"
+MSG_SNAPPER_FSTAB_MOUNTED="Mounted /.snapshots"
+MSG_SNAPPER_FSTAB_MOUNT_REBOOT="Could not mount /.snapshots (will be mounted on reboot)"
+MSG_SNAPPER_FSTAB_BOOT_MESSAGE="/.snapshots will be mounted on first boot"
+MSG_SNAPPER_FSTAB_ALREADY="/.snapshots already in /etc/fstab"
+MSG_SNAPPER_FSTAB_NO_CONFIG="Could not detect root subvolume configuration"
+MSG_SNAPPER_FSTAB_MANUAL="You may need to manually add /.snapshots to /etc/fstab"
+MSG_SNAPPER_FSTAB_NO_ROOT="Could not find root btrfs mount in /etc/fstab"
+
+# Fstab Optimization
+MSG_FSTAB_OPTIMIZE_HEADER="Optimizing fstab mount options"
+MSG_FSTAB_BACKUP_CREATED="Created fstab backup"
+MSG_FSTAB_OPTIMIZED="fstab optimized with best mount options for disk types"
+MSG_FSTAB_BACKUP_SAVED="Original fstab saved as /etc/fstab.backup"
+MSG_FSTAB_OPTIMIZED_HEADER="Optimized fstab:"
+
+# Config - Applications
+MSG_CONFIG_APPS_DIR_NOT_FOUND="Applications directory not found, skipping"
+
+# Config - Matugen
+MSG_CONFIG_MATUGEN_REMOVE_SYMLINK="Removing GTK symlink"
+
+# Config - Systemd
+MSG_CONFIG_SYSTEMD_LOGIND="logind.conf.d configuration installed"
+MSG_CONFIG_SYSTEMD_MODULES="Kernel modules configuration installed (ip_tables)"
+MSG_CONFIG_SYSTEMD_POWER="Enabling power management services..."
+MSG_CONFIG_SYSTEMD_ACPID="acpid.service enabled"
+MSG_CONFIG_SYSTEMD_TLP="tlp.service enabled"
+MSG_CONFIG_SYSTEMD_TLP_PD="tlp-pd.service enabled (PowerProfiles D-Bus interface for NS)"
+MSG_CONFIG_SYSTEMD_UPOWER="upower.service enabled"
+MSG_CONFIG_SYSTEMD_NM="NetworkManager.service enabled"
+MSG_CONFIG_SYSTEMD_NM_WAIT="NetworkManager-wait-online.service disabled (faster boot)"
+MSG_CONFIG_SYSTEMD_NETWORKD_WAIT="systemd-networkd-wait-online.service disabled (faster boot)"
+MSG_CONFIG_SYSTEMD_BLUETOOTH="bluetooth.service enabled"
+
+# Helpers - AUR Install
+MSG_HELPER_AUR_CREATE_USER="Creating builduser for AUR installations..."
+MSG_HELPER_AUR_USER_CONFIGURED="builduser configured with passwordless sudo"
+MSG_HELPER_AUR_INSTALLED="Installed"
+MSG_HELPER_AUR_CLEANUP="builduser cleaned up"
+
+# Login - SDDM
+MSG_LOGIN_SDDM_CONFIGURE="Configuring SDDM theme to use cyberpunk.conf..."
+MSG_LOGIN_SDDM_CONFIGURED="SDDM theme configured to cyberpunk"
+
+# Packaging - Applications
+MSG_PACKAGING_APPS_OFFICIAL="Official ${category} packages:"
+MSG_PACKAGING_APPS_AUR="AUR ${category} packages:"
+
+# Packaging - AUR Helper
+MSG_PACKAGING_AUR_INSTALLING="Installing yay AUR helper..."
+MSG_PACKAGING_AUR_CLONE_FAILED="Failed to clone yay from AUR"
+MSG_PACKAGING_AUR_BUILD_FAILED="Failed to build yay"
+MSG_PACKAGING_AUR_SUCCESS="yay installed successfully"
+
+# Packaging - Gaming
+MSG_PACKAGING_GAMING_OFFICIAL="Official gaming packages:"
+MSG_PACKAGING_GAMING_AUR="AUR gaming packages:"
+
+# Packaging - Package Managers
+MSG_PACKAGING_PKG_MGR="Installing package managers and utilities for them"
+MSG_PACKAGING_PKG_MGR_AUR="Installing package managers and utilities for them from AUR"
+MSG_PACKAGING_PKG_MGR_OFFICIAL="Installing package managers and utilities for them from official repos"
+
+# Post-install - Swap
+MSG_SWAP_RAM_SIZE="RAM: ${RAM_GB}GB, swapfile: ${SWAPFILE_SIZE}"
+MSG_SWAP_BTRFS_NOCOW="Detected Btrfs, preparing swapfile with NOCOW..."
+
+# Preflight - Locale
+MSG_LOCALE_SYSTEM="System locale: en_US.UTF-8"
+MSG_LOCALE_CONSOLE_KEYMAP="Console keymap"
+MSG_LOCALE_SELECTED="Selected"
+MSG_LOCALE_ENABLED="Enabled"
+MSG_LOCALE_GENERATING="Generating locales..."
+MSG_LOCALE_ADDITIONAL="Additional keymaps selected"
+MSG_LOCALE_CONFIGURE_HYPR="Configure them in Hyprland: ~/.config/hypr/input.conf"
+
+# SDDM
+MSG_SDDM_CONFIGURE_THEME="Configuring SDDM theme to use cyberpunk.conf..."
+MSG_SDDM_THEME_CONFIGURED="SDDM theme configured to cyberpunk"
+
+# Packaging - Applications
+MSG_PACKAGING_OFFICIAL="Official"
+MSG_PACKAGING_AUR="AUR"
+
+# Packaging - AUR Helper
+MSG_AUR_HELPER_INSTALLING="Installing yay AUR helper..."
+MSG_AUR_HELPER_CLONE_FAILED="Failed to clone yay from AUR"
+MSG_AUR_HELPER_BUILD_FAILED="Failed to build yay"
+MSG_AUR_HELPER_INSTALLED="yay installed successfully"
+
+# Packaging - Gaming
+MSG_GAMING_OFFICIAL_LIST="Official gaming packages:"
+MSG_GAMING_AUR_LIST="AUR gaming packages:"
+
+# Packaging - Package Managers
+MSG_PACKAGING_PM_INSTALL="Installing package managers and utilities for them"
+MSG_PACKAGING_PM_AUR="Installing package managers and utilities for them from AUR"
+MSG_PACKAGING_PM_OFFICIAL="Installing package managers and utilities for them from official repos"
+
+# Swap
+MSG_SWAP_CONFIG_INFO="RAM / swapfile"
+MSG_SWAP_BTRFS_NOCOW="Detected Btrfs, preparing swapfile with NOCOW..."
+
+# Locale
+MSG_LOCALE_ENABLED="Enabled"
+MSG_LOCALE_GENERATING="Generating locales..."
+MSG_LOCALE_SYSTEM_SET="System locale"
+MSG_KEYMAP_SELECTED="Selected"
+MSG_KEYMAP_CONSOLE_SET="Console keymap"
+MSG_KEYMAP_ADDITIONAL="Additional keymaps selected"
+MSG_KEYMAP_HYPRLAND_INFO="Configure them in Hyprland: ~/.config/hypr/input.conf"
+
+# Browser
+MSG_INSTALL_BROWSER="Installing browser..."
+MSG_INSTALL_FLATPAK="Installing Flatpak package manager..."
+MSG_ADD_FLATHUB="Adding Flathub repository..."
+MSG_INSTALL_FLOORP="Installing Floorp Browser (privacy-focused with PWA support)..."
+MSG_BROWSER_OK="Browser installed"
+
+# AppArmor
+MSG_SETUP_APPARMOR="Setting up AppArmor security module..."
+MSG_INSTALL_APPARMOR="Installing AppArmor..."
+MSG_APPARMOR_ENABLE_SERVICE="Enabling AppArmor service..."
+MSG_APPARMOR_ADD_KERNEL_PARAMS="Adding AppArmor to kernel parameters..."
+MSG_APPARMOR_REGENERATE_GRUB="Regenerating GRUB configuration..."
+MSG_APPARMOR_KERNEL_PARAMS_ADDED="AppArmor kernel parameters added"
+MSG_APPARMOR_KERNEL_PARAMS_OK="AppArmor kernel parameters already configured"
+MSG_INSTALL_APPARMOR_PROFILES="Installing AppArmor profiles collection (apparmor.d - complain mode)..."
+MSG_APPARMOR_SETUP_NOTIFY="Setting up AppArmor notifications (aa-notify)..."
+MSG_APPARMOR_OK="AppArmor configured"
+MSG_APPARMOR_CLI_UTILS="📌 AppArmor CLI utilities:"
+MSG_APPARMOR_REBOOT_REQUIRED="⚠️  AppArmor will be fully active after reboot"

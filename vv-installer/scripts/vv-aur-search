@@ -1,6 +1,6 @@
 #!/bin/bash
 # VV OS - AUR Package Search (TUI)
-# Search packages в Arch User Repository
+# Search packages in Arch User Repository
 
 set -e
 

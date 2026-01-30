@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-# Запуск TUI приложения в терминале
-# Адаптировано из Omarchy для VV Shell
+# Launch TUI application in terminal
+# Adapted from Omarchy for VV Shell
 
 APP_ID="org.vv.$(basename $1)"
 
