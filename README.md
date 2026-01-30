@@ -81,6 +81,67 @@ Then follow Method 1 with your custom ISO.
 
 ---
 
+## Connecting to Network
+
+**Need internet for installation?** VV OS Live ISO provides three ways to connect:
+
+### Option 1: Noctalia Shell GUI (Easiest)
+
+**For GUI users:**
+
+1. Click the **network icon** in the top-right corner of Noctalia Shell
+2. **Wi-Fi**: Select your network → enter password → Connect
+3. **Ethernet**: Auto-connects when cable is plugged in
+
+### Option 2: nmtui (Terminal UI)
+
+**For TUI enthusiasts:**
+
+```bash
+# Launch Network Manager TUI
+nmtui
+```
+
+**Wi-Fi Setup:**
+1. Select **"Activate a connection"**
+2. Choose your Wi-Fi network
+3. Enter password when prompted
+4. Press **Enter** to connect
+
+**Ethernet**: Auto-connects when cable is plugged in (no setup needed)
+
+### Option 3: nmcli (Command Line)
+
+**For CLI power users:**
+
+**Wi-Fi:**
+```bash
+# Scan for networks
+nmcli device wifi list
+
+# Connect to Wi-Fi
+nmcli device wifi connect "SSID" password "your_password"
+
+# Check connection status
+nmcli connection show
+```
+
+**Ethernet:**
+```bash
+# Check status (should auto-connect)
+nmcli device status
+
+# Manual connection if needed
+nmcli connection up "Wired connection 1"
+```
+
+**Verify Internet Connection:**
+```bash
+ping -c 3 archlinux.org
+```
+
+---
+
 ## System Requirements
 
 ### Minimum Specs

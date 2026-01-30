@@ -8,6 +8,9 @@ CLAUDE.md
 info-for-claude/
 docs/
 
+# Отдельные проекты (git submodules с собственными репозиториями)
+vv-projects/
+
 # Dev container (локальная разработка)
 .devcontainer/
 .devcontainer.backup-arch/
@@ -46,12 +49,14 @@ cache/
 # Build артефакты
 *.iso
 *.img
+SHA*.txt
 build/
 dist/
 archiso/airootfs/root/vv-os/
 
 # AUR build артефакты (создаются build.sh)
 archiso/repo/
+archiso/aur-backup/
 vv-installer/*/src/
 vv-installer/*/pkg/
 vv-installer/*/*.pkg.tar.zst
@@ -62,6 +67,13 @@ vv-installer/*/gpu-screen-recorder/
 vv-installer/*/sddm-astronaut-theme/
 vv-installer/*/*.tar.gz
 vv-installer/*/*.tar.xz
+
+# AUR packages (клонируются fresh при сборке ISO)
+vv-installer/gpu-screen-recorder/
+vv-installer/noctalia-shell-git/
+vv-installer/sddm-astronaut-theme/
+vv-installer/plymouth-themes-adi1090x-git/
+vv-installer/rate-mirrors-bin/
 
 # Archiso Dockerfile (для будущих GitHub Actions)
 archiso/Dockerfile

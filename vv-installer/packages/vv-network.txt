@@ -2,6 +2,7 @@
 networkmanager
 ufw
 gufw
+xorg-xhost  # Required for gufw GUI on Wayland
 bluez
 bluez-utils
 bluez-qt

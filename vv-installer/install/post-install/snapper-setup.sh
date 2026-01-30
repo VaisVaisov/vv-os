@@ -46,6 +46,63 @@ else
   show_info "$MSG_SNAPPER_SPACE_LIMITS (max 30% disk usage, keep 15% free)"
 
   show_success "$MSG_SNAPPER_CONFIG_CREATED"
+
+  # Add /.snapshots to fstab for grub-btrfs compatibility
+  show_info "$MSG_SNAPPER_ADDING_FSTAB"
+
+  # Get root partition UUID and subvolume from fstab
+  ROOT_FSTAB_LINE=$(grep -E '^\s*UUID=.*\s+/\s+btrfs' /etc/fstab | head -n1)
+
+  if [[ -n "$ROOT_FSTAB_LINE" ]]; then
+    # Extract UUID
+    ROOT_UUID=$(echo "$ROOT_FSTAB_LINE" | grep -oP 'UUID=\K[^\s]+')
+
+    # Extract mount options (everything between btrfs and the numbers at end)
+    ROOT_OPTS=$(echo "$ROOT_FSTAB_LINE" | grep -oP 'btrfs\s+\K[^\s]+')
+
+    # Extract root subvolume name (e.g., /@ or @)
+    ROOT_SUBVOL=$(echo "$ROOT_OPTS" | grep -oP 'subvol=\K[^\s,]+')
+
+    if [[ -n "$ROOT_UUID" ]] && [[ -n "$ROOT_SUBVOL" ]]; then
+      # Build snapshots subvolume path (e.g., /@/.snapshots)
+      SNAPSHOTS_SUBVOL="${ROOT_SUBVOL}/.snapshots"
+
+      # Replace subvol= in options
+      SNAPSHOTS_OPTS=$(echo "$ROOT_OPTS" | sed "s|subvol=[^,]*|subvol=${SNAPSHOTS_SUBVOL}|")
+
+      # Check if /.snapshots already in fstab
+      if ! grep -q '/.snapshots' /etc/fstab; then
+        # Add to fstab
+        echo "" >> /etc/fstab
+        echo "# Snapper snapshots subvolume (required for grub-btrfs)" >> /etc/fstab
+        echo "UUID=${ROOT_UUID}  /.snapshots  btrfs  ${SNAPSHOTS_OPTS}  0 0" >> /etc/fstab
+
+        show_success "$MSG_SNAPPER_FSTAB_ADDED"
+
+        # Create mount point if needed
+        mkdir -p /.snapshots
+
+        # Mount it (only if not in chroot)
+        if [[ -z "${VV_CHROOT_INSTALL:-}" ]]; then
+          if mount /.snapshots 2>/dev/null; then
+            show_success "$MSG_SNAPPER_FSTAB_MOUNTED"
+          else
+            show_warning "$MSG_SNAPPER_FSTAB_MOUNT_REBOOT"
+          fi
+        else
+          show_info "$MSG_SNAPPER_FSTAB_BOOT_MESSAGE"
+        fi
+      else
+        show_info "$MSG_SNAPPER_FSTAB_ALREADY"
+      fi
+    else
+      show_warning "$MSG_SNAPPER_FSTAB_NO_CONFIG"
+      show_info "$MSG_SNAPPER_FSTAB_MANUAL"
+    fi
+  else
+    show_warning "$MSG_SNAPPER_FSTAB_NO_ROOT"
+    show_info "$MSG_SNAPPER_FSTAB_MANUAL"
+  fi
 fi
 
 # Create Initial Snapshot (post-install state)

@@ -4,14 +4,14 @@
 # Setup builduser with passwordless sudo for makepkg, pacman, and yay (idempotent)
 setup_builduser() {
     if ! id -u builduser &>/dev/null; then
-        show_info "Creating builduser for AUR installations..."
+        show_info "$MSG_HELPER_AUR_CREATE_USER"
         useradd -m builduser
 
         # Configure sudoers for passwordless makepkg, pacman, and yay
         echo "builduser ALL = (root) NOPASSWD: /usr/bin/makepkg, /usr/bin/pacman, /usr/bin/yay" > /etc/sudoers.d/02_builduser
         chmod 440 /etc/sudoers.d/02_builduser
 
-        show_success "builduser configured with passwordless sudo"
+        show_success "$MSG_HELPER_AUR_USER_CONFIGURED"
     fi
 }
 
@@ -29,7 +29,7 @@ install_aur_package() {
         return 1
     fi
 
-    show_success "Installed: $pkg"
+    show_success "$MSG_HELPER_AUR_INSTALLED: $pkg"
 }
 
 # Cleanup temporary build user (call this ONCE at the end of all AUR installations)
@@ -43,6 +43,6 @@ cleanup_builduser() {
         # Remove builduser
         userdel -r builduser 2>/dev/null || true
 
-        show_success "builduser cleaned up"
+        show_success "$MSG_HELPER_AUR_CLEANUP"
     fi
 }

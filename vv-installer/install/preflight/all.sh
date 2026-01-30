@@ -6,6 +6,9 @@ source "$VV_INSTALL/preflight/language.sh"
 
 start_install_log
 
+# Optimize fstab mount options based on disk types
+run_logged "$VV_INSTALL/preflight/fstab-optimize.sh"
+
 run_logged "$VV_INSTALL/preflight/check-arch.sh"
 run_logged "$VV_INSTALL/preflight/check-network.sh"
 run_logged "$VV_INSTALL/preflight/pacman.sh"
