@@ -2,3 +2,12 @@
 steamtinkerlaunch
 xmcl-launcher
 an-anime-game-launcher-bin
+
+# Retro gaming
+emudeck-bin
+jdownloader2
+emulationstation-de
+steam-rom-manager-bin
+
+# Game streaming
+sunshine-bin

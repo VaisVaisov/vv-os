@@ -1,19 +1,19 @@
 #!/bin/zsh
 
-# Запуск webapp через браузер с поддержкой --app
-# Адаптировано из Omarchy для VV Shell
+# Launch webapp via browser with --app support
+# Adapted from Omarchy for VV Shell
 
 # Получаем дефолтный браузер
 browser=$(xdg-settings get default-web-browser)
 
 # Проверяем, поддерживает ли браузер --app
 case $browser in
-  google-chrome* | brave-browser* | microsoft-edge* | opera* | vivaldi*)
+  google-chrome* | brave-browser* | microsoft-edge* | opera* | vivaldi* | *floorp*)
     # Поддерживает --app
     ;;
   *)
-    # Fallback на chromium
-    browser="chromium.desktop"
+    # Fallback на Floorp (Flatpak)
+    browser="one.ablaze.floorp.desktop"
     ;;
 esac
 

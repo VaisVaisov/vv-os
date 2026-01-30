@@ -1,10 +1,12 @@
 # Development tools
 git
 lazygit
-code
+github-cli
 docker
 lazydocker
+qemu-desktop
 jdk-openjdk
 cmake
 clang
 bat
+zerotier-one

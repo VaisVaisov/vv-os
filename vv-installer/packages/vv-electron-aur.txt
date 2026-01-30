@@ -1,2 +1,3 @@
 # Electron frameworks
 electron25-bin
+electron22-bin

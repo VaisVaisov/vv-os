@@ -2,3 +2,4 @@
 yandex-music
 anytype-bin
 happ-desktop-bin
+anydesk-bin

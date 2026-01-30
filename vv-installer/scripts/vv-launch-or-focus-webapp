@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-# Запуск webapp или фокусировка на существующем окне
-# Адаптировано из Omarchy для VV Shell
+# Launch webapp or focus on existing window
+# Adapted from Omarchy for VV Shell
 
 if (($# == 0)); then
   echo "Usage: vv-launch-or-focus-webapp [window-pattern] [url-and-flags...]"

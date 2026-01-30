@@ -1,5 +1,5 @@
 # User applications
-chromium
 telegram-desktop
 thunderbird
 libreoffice-fresh
+gimp

@@ -119,6 +119,43 @@ apply_rules() {
 
   show_info "$MSG_FIREWALL_ENABLE"
   sudo ufw --force enable
+
+  # Enable UFW systemd service
+  show_info "$MSG_FIREWALL_ENABLE_SERVICE"
+  if [[ -z "${VV_CHROOT_INSTALL:-}" ]]; then
+    sudo systemctl enable ufw.service
+  else
+    systemctl enable ufw.service
+  fi
+
+  # Auto-detect and configure Happ VPN if installed
+  if command -v happ &>/dev/null; then
+    show_info "$MSG_FIREWALL_HAPP_DETECTED"
+    sudo ufw allow in on tun0
+    sudo ufw allow out on tun0
+    show_success "$MSG_FIREWALL_HAPP_CONFIGURED"
+  fi
+
+  # Configure xhost for gufw GUI on Wayland (Hyprland)
+  show_info "$MSG_FIREWALL_CONFIGURE_XHOST"
+  HYPR_AUTOSTART="$VV_USER_HOME/.config/hypr/autostart.conf"
+
+  if [[ -f "$HYPR_AUTOSTART" ]]; then
+    # Check if xhost already configured
+    if ! grep -q "xhost +SI:localuser:root" "$HYPR_AUTOSTART"; then
+      echo "" >> "$HYPR_AUTOSTART"
+      echo "# X server access for root apps (gufw, etc.) on Wayland" >> "$HYPR_AUTOSTART"
+      echo "exec-once = xhost +SI:localuser:\$(id -un)" >> "$HYPR_AUTOSTART"
+      echo "exec-once = xhost +SI:localuser:root" >> "$HYPR_AUTOSTART"
+      chown "$VV_USER:$VV_USER" "$HYPR_AUTOSTART"
+      show_success "$MSG_FIREWALL_XHOST_CONFIGURED"
+    else
+      show_info "$MSG_FIREWALL_XHOST_ALREADY"
+    fi
+  else
+    show_warning "$MSG_FIREWALL_HYPR_NOT_FOUND"
+  fi
+
   show_success "$MSG_FIREWALL_COMPLETE"
   sudo ufw status verbose
 }

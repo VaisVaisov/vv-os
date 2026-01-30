@@ -15,43 +15,100 @@ fi
 show_info "$MSG_SNAPPER_BTRFS_DETECTED"
 
 # Check if snapper config already exists
-if snapper list-configs | grep -q "root"; then
+if snapper --no-dbus list-configs | grep -q "root"; then
   show_success "$MSG_SNAPPER_CONFIG_EXISTS"
 else
   # Create snapper config for root
   show_info "$MSG_SNAPPER_CREATE_CONFIG"
 
   # Create config (this will create /.snapshots subvolume)
-  snapper -c root create-config /
+  snapper --no-dbus -c root create-config /
 
   # Configure snapper settings
-  snapper -c root set-config TIMELINE_CREATE="yes"
-  snapper -c root set-config TIMELINE_CLEANUP="yes"
+  snapper --no-dbus -c root set-config TIMELINE_CREATE="yes"
+  snapper --no-dbus -c root set-config TIMELINE_CLEANUP="yes"
 
   # Keep snapshots for reasonable time
-  snapper -c root set-config TIMELINE_LIMIT_HOURLY="5"
-  snapper -c root set-config TIMELINE_LIMIT_DAILY="7"
-  snapper -c root set-config TIMELINE_LIMIT_WEEKLY="4"
-  snapper -c root set-config TIMELINE_LIMIT_MONTHLY="6"
-  snapper -c root set-config TIMELINE_LIMIT_YEARLY="2"
+  snapper --no-dbus -c root set-config TIMELINE_LIMIT_HOURLY="5"
+  snapper --no-dbus -c root set-config TIMELINE_LIMIT_DAILY="7"
+  snapper --no-dbus -c root set-config TIMELINE_LIMIT_WEEKLY="4"
+  snapper --no-dbus -c root set-config TIMELINE_LIMIT_MONTHLY="6"
+  snapper --no-dbus -c root set-config TIMELINE_LIMIT_YEARLY="2"
 
   # Disk space management
   # SPACE_LIMIT: Max % of disk space snapshots can use (default: 0.5 = 50%)
-  snapper -c root set-config SPACE_LIMIT="0.3"  # 30% max
+  snapper --no-dbus -c root set-config SPACE_LIMIT="0.3"  # 30% max
 
   # FREE_LIMIT: Min % of free space to keep (default: 0.2 = 20%)
-  snapper -c root set-config FREE_LIMIT="0.15"  # Keep 15% free
+  snapper --no-dbus -c root set-config FREE_LIMIT="0.15"  # Keep 15% free
 
   # When space limits exceeded, snapper will auto-delete oldest snapshots
   show_info "$MSG_SNAPPER_SPACE_LIMITS (max 30% disk usage, keep 15% free)"
 
   show_success "$MSG_SNAPPER_CONFIG_CREATED"
+
+  # Add /.snapshots to fstab for grub-btrfs compatibility
+  show_info "$MSG_SNAPPER_ADDING_FSTAB"
+
+  # Get root partition UUID and subvolume from fstab
+  ROOT_FSTAB_LINE=$(grep -E '^\s*UUID=.*\s+/\s+btrfs' /etc/fstab | head -n1)
+
+  if [[ -n "$ROOT_FSTAB_LINE" ]]; then
+    # Extract UUID
+    ROOT_UUID=$(echo "$ROOT_FSTAB_LINE" | grep -oP 'UUID=\K[^\s]+')
+
+    # Extract mount options (everything between btrfs and the numbers at end)
+    ROOT_OPTS=$(echo "$ROOT_FSTAB_LINE" | grep -oP 'btrfs\s+\K[^\s]+')
+
+    # Extract root subvolume name (e.g., /@ or @)
+    ROOT_SUBVOL=$(echo "$ROOT_OPTS" | grep -oP 'subvol=\K[^\s,]+')
+
+    if [[ -n "$ROOT_UUID" ]] && [[ -n "$ROOT_SUBVOL" ]]; then
+      # Build snapshots subvolume path (e.g., /@/.snapshots)
+      SNAPSHOTS_SUBVOL="${ROOT_SUBVOL}/.snapshots"
+
+      # Replace subvol= in options
+      SNAPSHOTS_OPTS=$(echo "$ROOT_OPTS" | sed "s|subvol=[^,]*|subvol=${SNAPSHOTS_SUBVOL}|")
+
+      # Check if /.snapshots already in fstab
+      if ! grep -q '/.snapshots' /etc/fstab; then
+        # Add to fstab
+        echo "" >> /etc/fstab
+        echo "# Snapper snapshots subvolume (required for grub-btrfs)" >> /etc/fstab
+        echo "UUID=${ROOT_UUID}  /.snapshots  btrfs  ${SNAPSHOTS_OPTS}  0 0" >> /etc/fstab
+
+        show_success "$MSG_SNAPPER_FSTAB_ADDED"
+
+        # Create mount point if needed
+        mkdir -p /.snapshots
+
+        # Mount it (only if not in chroot)
+        if [[ -z "${VV_CHROOT_INSTALL:-}" ]]; then
+          if mount /.snapshots 2>/dev/null; then
+            show_success "$MSG_SNAPPER_FSTAB_MOUNTED"
+          else
+            show_warning "$MSG_SNAPPER_FSTAB_MOUNT_REBOOT"
+          fi
+        else
+          show_info "$MSG_SNAPPER_FSTAB_BOOT_MESSAGE"
+        fi
+      else
+        show_info "$MSG_SNAPPER_FSTAB_ALREADY"
+      fi
+    else
+      show_warning "$MSG_SNAPPER_FSTAB_NO_CONFIG"
+      show_info "$MSG_SNAPPER_FSTAB_MANUAL"
+    fi
+  else
+    show_warning "$MSG_SNAPPER_FSTAB_NO_ROOT"
+    show_info "$MSG_SNAPPER_FSTAB_MANUAL"
+  fi
 fi
 
 # Create Initial Snapshot (post-install state)
 show_info "$MSG_SNAPPER_INITIAL_SNAPSHOT"
 
-SNAPSHOT_NUMBER=$(snapper -c root create --description "Initial VV OS Installation" --cleanup-algorithm number --print-number)
+SNAPSHOT_NUMBER=$(snapper --no-dbus -c root create --description "Initial VV OS Installation" --cleanup-algorithm number --print-number)
 
 if [[ -n "$SNAPSHOT_NUMBER" ]]; then
   show_success "$MSG_SNAPPER_SNAPSHOT_CREATED (#$SNAPSHOT_NUMBER)"
@@ -139,7 +196,7 @@ if [[ -z "${VV_CHROOT_INSTALL:-}" ]]; then
   # Show current snapshots
   echo ""
   show_header "$MSG_SNAPPER_LIST"
-  snapper -c root list
+  snapper --no-dbus -c root list
   echo ""
 else
   show_info "$MSG_SNAPPER_TIMERS_BOOT_MESSAGE"

@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-# Установка webapp - создание .desktop файла
-# Адаптировано из Omarchy для VV Shell
+# Webapp Install - create .desktop file
+# Adapted from Omarchy for VV Shell
 
 if [ "$#" -lt 3 ]; then
   # Интерактивный режим

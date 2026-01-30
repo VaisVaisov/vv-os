@@ -2,6 +2,7 @@
 networkmanager
 ufw
 gufw
+xorg-xhost
 bluez
 bluez-utils
 bluez-qt

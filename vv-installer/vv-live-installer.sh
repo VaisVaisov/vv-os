@@ -142,7 +142,7 @@ verify_base_install() {
 run_postinstall_in_chroot() {
   section "STEP 4: Running VV OS Post-installation"
 
-  VV_OS_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  VV_OS_PATH="/root/vv-os"
   info "Copying VV OS to installed system..."
   mkdir -p /mnt/root/vv-os
   cp -r "$VV_OS_PATH"/* /mnt/root/vv-os/

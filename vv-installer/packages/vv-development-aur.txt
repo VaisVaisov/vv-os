@@ -2,4 +2,4 @@
 docker-desktop
 claude-code
 claude-desktop
-claude-desktop-debug
+visual-studio-code-bin

@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-# Установка TUI - создание .desktop файла для TUI приложения
-# Адаптировано из Omarchy для VV Shell
+# TUI Install - create .desktop file for TUI application
+# Adapted from Omarchy for VV Shell
 
 if [ "$#" -ne 4 ]; then
   # Интерактивный режим

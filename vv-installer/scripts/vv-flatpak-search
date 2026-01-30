@@ -1,6 +1,6 @@
 #!/bin/bash
 # VV OS - Flatpak Package Search (TUI)
-# Search packages в Flathub
+# Search packages in Flathub
 
 set -e
 
