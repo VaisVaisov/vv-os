@@ -1,6 +1,6 @@
 #!/bin/bash
 # VV OS - Pacman Package Search (TUI)
-# Search packages в официальных репозиториях Arch Linux
+# Search packages in official Arch Linux repositories
 
 set -e
 

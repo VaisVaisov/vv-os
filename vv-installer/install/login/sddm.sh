@@ -27,9 +27,9 @@ fi
 # Configure theme to use cyberpunk.conf
 METADATA_FILE="/usr/share/sddm/themes/sddm-astronaut-theme/metadata.desktop"
 if [[ -f "$METADATA_FILE" ]]; then
-  show_info "Configuring SDDM theme to use cyberpunk.conf..."
+  show_info "$MSG_SDDM_CONFIGURE_THEME"
   sudo sed -i 's|ConfigFile=Themes/astronaut.conf|ConfigFile=Themes/cyberpunk.conf|' "$METADATA_FILE"
-  show_success "SDDM theme configured to cyberpunk"
+  show_success "$MSG_SDDM_THEME_CONFIGURED"
 fi
 
 # Copy theme config

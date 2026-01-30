@@ -22,5 +22,5 @@ if [[ -d "$VV_CONFIGS/applications" ]]; then
 
   show_success "$MSG_APPLICATIONS_OK"
 else
-  show_info "Applications directory not found, skipping"
+  show_info "$MSG_CONFIG_APPS_DIR_NOT_FOUND"
 fi

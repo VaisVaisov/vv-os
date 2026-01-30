@@ -11,72 +11,72 @@ REPO_DIR="$PROFILE_DIR/repo"
 echo "=== VV OS ISO Builder ==="
 echo ""
 
-# Проверка что скрипт запущен на Arch Linux
+# Check that script is running on Arch Linux
 if [ ! -f /etc/arch-release ]; then
-  echo "❌ Этот скрипт должен запускаться на Arch Linux"
+  echo "❌ This script must be run on Arch Linux"
   exit 1
 fi
 
-# Проверка наличия archiso
+# Check for archiso
 if ! command -v mkarchiso &>/dev/null; then
-  echo "→ Установка archiso..."
+  echo "→ Installing archiso..."
   sudo pacman -Sy --needed --noconfirm archiso
 fi
 
-# Определяем пользователя для сборки AUR
+# Determine build user for AUR packages
 BUILD_USER="${SUDO_USER:-$(getent passwd | awk -F: '$3 == 1000 {print $1}')}"
-echo "→ Сборка выполняется от root, пакеты AUR собираются пользователем: $BUILD_USER"
+echo "→ Building as root, AUR packages will be built by user: $BUILD_USER"
 echo ""
 
-# Очистка предыдущих сборок
-echo "→ Очистка предыдущих сборок..."
+# Clean previous builds
+echo "→ Cleaning previous builds..."
 sudo rm -rf "$WORK_DIR"
 
-# Проверка и очистка /tmp/archiso-tmp
+# Check and clean /tmp/archiso-tmp
 TMP_DIR="/tmp/archiso-tmp"
-echo "→ Очистка содержимого старого каталога $TMP_DIR..."
+echo "→ Cleaning old directory contents $TMP_DIR..."
 if [ -d "$TMP_DIR" ] && [ "$(ls -A "$TMP_DIR")" ]; then
     sudo rm -rf "$TMP_DIR/*"
 else
-    echo "→ $TMP_DIR пустой, удалять нечего"
+    echo "→ $TMP_DIR is empty, nothing to delete"
 fi
 
-# Проверка и очистка OUT_DIR
+# Check and clean OUT_DIR
 mkdir -p "$OUT_DIR"
-echo "→ Удаление старых файлов в $OUT_DIR..."
+echo "→ Removing old files in $OUT_DIR..."
 if [ "$(ls -A "$OUT_DIR")" ]; then
     rm -rf "$OUT_DIR"/*
 else
-    echo "→ $OUT_DIR пустой, удалять нечего"
+    echo "→ $OUT_DIR is empty, nothing to delete"
 fi
 
-# Удаляем репозиторий vv-os из pacman.conf (если остался от прошлой сборки)
+# Remove vv-os repository from pacman.conf (if left from previous build)
 if grep -q "\[vv-os\]" /etc/pacman.conf; then
-    echo "→ Удаление старого репозитория vv-os из pacman.conf..."
+    echo "→ Removing old vv-os repository from pacman.conf..."
     sed -i '/\[vv-os\]/,/^$/d' /etc/pacman.conf
 fi
 
-# Создание и очистка REPO_DIR
+# Create and clean REPO_DIR
 mkdir -p "$REPO_DIR"
-echo "→ Очистка локального репозитория..."
+echo "→ Cleaning local repository..."
 if [ "$(ls -A "$REPO_DIR")" ]; then
     rm -rf "$REPO_DIR"/*
-    echo "→ Старые пакеты удалены"
+    echo "→ Old packages removed"
 else
-    echo "→ $REPO_DIR пустой, удалять нечего"
+    echo "→ $REPO_DIR is empty, nothing to delete"
 fi
 
-# Подготовка airootfs
-echo "→ Подготовка airootfs..."
+# Prepare airootfs
+echo "→ Preparing airootfs..."
 rm -rf "$PROFILE_DIR/airootfs/root/vv-os"
 mkdir -p "$PROFILE_DIR/airootfs/root/vv-os"
 
-# Создание пустых директорий для bootloader конфигов
+# Create empty directories for bootloader configs
 mkdir -p "$PROFILE_DIR/syslinux"
 mkdir -p "$PROFILE_DIR/grub"
 
-# Копирование vv-os в ISO (без рекурсии в archiso)
-echo "→ Копирование vv-os в ISO..."
+# Copy vv-os to ISO (without recursion into archiso)
+echo "→ Copying vv-os to ISO..."
 rsync -a \
   --exclude archiso \
   --exclude .git \
@@ -91,23 +91,23 @@ rsync -a \
   "$PROFILE_DIR/../vv-installer/" \
   "$PROFILE_DIR/airootfs/root/vv-os/"
 
-# Установка скриптов в систему
+# Install scripts to system
 mkdir -p "$PROFILE_DIR/airootfs/usr/local/bin"
 cp "$PROFILE_DIR/airootfs/root/vv-os/vv-live-installer.sh" "$PROFILE_DIR/airootfs/usr/local/bin/"
 chmod +x "$PROFILE_DIR/airootfs/usr/local/bin/vv-live-installer.sh"
 
 # === POLKIT: Allow live user to run installer without password ===
-echo "→ Настройка polkit для запуска установщика..."
+echo "→ Configuring polkit for installer..."
 mkdir -p "$PROFILE_DIR/airootfs/etc/polkit-1/localauthority/50-local.d/"
 cp "$PROFILE_DIR/../vv-installer/configs/polkit/49-vv-installer.pkla" \
    "$PROFILE_DIR/airootfs/etc/polkit-1/localauthority/50-local.d/"
 
-# Установка прав на выполнение для всех .sh файлов
-echo "→ Установка прав на выполнение для скриптов..."
+# Set execute permissions for all .sh files
+echo "→ Setting execute permissions for scripts..."
 find "$PROFILE_DIR/airootfs/root/vv-os" -type f -name "*.sh" -exec chmod +x {} \;
 
 # ==============================================================================
-# СБОРКА ПАКЕТОВ AUR
+# AUR PACKAGES BUILD
 # ==============================================================================
 
 AUR_PKGS=(
@@ -118,28 +118,60 @@ AUR_PKGS=(
   "rate-mirrors-bin"
 )
 
-echo "→ Сборка пакетов из AUR..."
+echo "→ Building AUR packages..."
 pacman -Sy --needed --noconfirm base-devel git
 
-# Даём BUILD_USER права на установку пакетов без пароля (для makepkg -s)
+# Give BUILD_USER permission to install packages without password (for makepkg -s)
 echo "$BUILD_USER ALL=(ALL) NOPASSWD: /usr/bin/pacman" > /etc/sudoers.d/99-aur-build
 chmod 0440 /etc/sudoers.d/99-aur-build
 
 chmod o+x "$HOME" || true
 chmod -R o+r "$REPO_DIR"
 
+# Update AUR packages from AUR (get latest PKGBUILD)
+echo "→ Updating AUR packages from AUR..."
+BACKUP_DIR="$PROFILE_DIR/aur-backup"
+mkdir -p "$BACKUP_DIR"
+
+for pkg in "${AUR_PKGS[@]}"; do
+  PKG_DIR="$PROFILE_DIR/../vv-installer/$pkg"
+  echo "  → Updating $pkg..."
+
+  # Backup old PKGBUILD (if exists) - old backup will be overwritten
+  if [ -d "$PKG_DIR" ]; then
+    rm -rf "$BACKUP_DIR/$pkg"
+    cp -r "$PKG_DIR" "$BACKUP_DIR/$pkg"
+  fi
+
+  # Clone fresh from AUR
+  rm -rf "$PKG_DIR"
+  if git clone --depth=1 "https://aur.archlinux.org/${pkg}.git" "$PKG_DIR" 2>/dev/null; then
+    echo "    ✅ Updated from AUR"
+  else
+    echo "    ⚠️ Clone failed, restoring backup"
+    # Restore from backup if clone failed
+    if [ -d "$BACKUP_DIR/$pkg" ]; then
+      cp -r "$BACKUP_DIR/$pkg" "$PKG_DIR"
+      echo "    ✅ Restored from backup"
+    else
+      echo "    ❌ No backup available, build will fail"
+    fi
+  fi
+done
+echo ""
+
 for pkg in "${AUR_PKGS[@]}"; do
   PKG_SRC="$PROFILE_DIR/../vv-installer/$pkg"
   if [ -d "$PKG_SRC" ]; then
-    echo "  → Сборка $pkg..."
+    echo "  → Building $pkg..."
     chown -R "$BUILD_USER" "$PKG_SRC"
     cd "$PKG_SRC"
 
-    # Очистка старых сборочных файлов
+    # Clean old build files
     rm -f *.pkg.tar.zst
     rm -rf src/ pkg/
 
-    # Очистка git клонов для конкретных пакетов
+    # Clean git clones for specific packages
     case "$pkg" in
       plymouth-themes-adi1090x-git)
         rm -rf plymouth-themes
@@ -152,66 +184,72 @@ for pkg in "${AUR_PKGS[@]}"; do
       PKG_FILE=$(ls *.pkg.tar.zst | grep -v -- "-debug-" | head -n1)
       cp "$PKG_FILE" "$REPO_DIR/"
 
-      # Обновляем локальный репозиторий после каждого пакета
+      # Update local repository after each package
       repo-add "$REPO_DIR/vv-os.db.tar.gz" "$REPO_DIR"/*.pkg.tar.zst &>/dev/null
 
-      # Добавляем репозиторий в систему (только один раз)
+      # Add repository to system (only once)
       REAL_REPO_DIR="$(realpath "$REPO_DIR")"
       if ! grep -q "\[vv-os\]" /etc/pacman.conf; then
         sed -i "1i [vv-os]\nSigLevel = Optional TrustAll\nServer = file://$REAL_REPO_DIR\n" /etc/pacman.conf
       fi
       pacman -Sy &>/dev/null
 
-      # Патчим sddm-astronaut-theme для использования cyberpunk.conf
+      # Patch sddm-astronaut-theme to use cyberpunk.conf
       if [ "$pkg" = "sddm-astronaut-theme" ]; then
-        echo "    → Патчим тему на cyberpunk.conf..."
+        echo "    → Patching theme to use cyberpunk.conf..."
         pacman -U --noconfirm "$REPO_DIR/$PKG_FILE" &>/dev/null
         METADATA_FILE="/usr/share/sddm/themes/sddm-astronaut-theme/metadata.desktop"
         if [ -f "$METADATA_FILE" ]; then
           sed -i 's|ConfigFile=Themes/astronaut.conf|ConfigFile=Themes/cyberpunk.conf|' "$METADATA_FILE"
-          echo "    ✅ Тема настроена на cyberpunk"
+          echo "    ✅ Theme configured for cyberpunk"
         fi
       fi
 
-      echo "    ✅ $pkg → репозиторий"
+      echo "    ✅ $pkg → repository"
     else
-      echo "    ❌ Ошибка сборки $pkg"
+      echo "    ❌ Build failed for $pkg"
       exit 1
     fi
     cd - &>/dev/null
   else
-    echo "  ⚠️ $pkg не найден"
+    echo "  ⚠️ $pkg not found"
   fi
 done
 
 # ==============================================================================
-# PACMAN.CONF + СБОРКА ОБРАЗА
+# PACMAN.CONF + BUILD ISO
 # ==============================================================================
 TEMP_CONF=$(mktemp)
 cat "$PROFILE_DIR/pacman.conf" > "$TEMP_CONF"
 
-# Используем realpath для гарантированного доступа в chroot
+# Use realpath for guaranteed access in chroot
 REAL_REPO_DIR="$(realpath "$REPO_DIR")"
 sed -i "1i [vv-os]\nSigLevel = Optional TrustAll\nServer = file://$REAL_REPO_DIR\n" "$TEMP_CONF"
 
-# Очистка build-артефактов AUR пакетов (экономия места на диске)
-echo "→ Очистка build-артефактов AUR пакетов..."
+# Clean build artifacts of AUR packages (save disk space)
+echo "→ Cleaning AUR package build artifacts..."
 for pkg in "${AUR_PKGS[@]}"; do
   sudo rm -rf "$PROFILE_DIR/airootfs/root/vv-os/$pkg"
-  echo "    ✅ Очищен $pkg"
+  echo "    ✅ Cleaned $pkg"
 done
 
-# Сборка ISO
+# Build ISO
 echo ""
-echo "→ Сборка ISO..."
+echo "→ Building ISO..."
 sudo mkarchiso -v -C "$TEMP_CONF" -w "$WORK_DIR" -o "$OUT_DIR" "$PROFILE_DIR"
 
-# Очистка
-echo "→ Очистка временных файлов..."
+# Cleanup
+echo "→ Cleaning temporary files..."
 rm -f "$TEMP_CONF"
 sed -i '/\[vv-os\]/,/^$/d' /etc/pacman.conf
 
+# Clean /tmp from build artifacts (Docker doesn't auto-clean)
+echo "→ Cleaning /tmp build artifacts..."
+rm -rf /tmp/vv-* /tmp/*_old.PKGBUILD 2>/dev/null || true
+
+# Note: AUR backups in archiso/aur-backup/ are kept for next build as fallback
+
 echo ""
-echo "✅ ISO собран успешно!"
-echo "→ ISO находится в: $OUT_DIR/"
+echo "✅ ISO built successfully!"
+echo "→ ISO is located at: $OUT_DIR/"
 ls -lh "$OUT_DIR"/*.iso

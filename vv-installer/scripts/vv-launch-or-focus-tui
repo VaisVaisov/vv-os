@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-# Запуск TUI или фокусировка на существующем окне
-# Адаптировано из Omarchy для VV Shell
+# Launch TUI or focus on existing window
+# Adapted from Omarchy for VV Shell
 
 APP_ID="org.vv.$(basename $1)"
 LAUNCH_COMMAND="vv-launch-tui $@"

@@ -46,18 +46,18 @@ if selected=$(gum choose --no-limit "${options[@]}"); then
       # Uncomment in /etc/locale.gen
       sed -i "s/^#${locale_code}.UTF-8 UTF-8/${locale_code}.UTF-8 UTF-8/" /etc/locale.gen
       selected_locales+=("${locale_code}.UTF-8")
-      show_info "Enabled: ${locale_code}.UTF-8"
+      show_info "$MSG_LOCALE_ENABLED: ${locale_code}.UTF-8"
     fi
   done <<< "$selected"
 fi
 
 # Generate all selected locales
-show_info "Generating locales..."
+show_info "$MSG_LOCALE_GENERATING"
 locale-gen
 
 # Set system locale to en_US.UTF-8 (standard)
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
-show_success "System locale: en_US.UTF-8"
+show_success "$MSG_LOCALE_SYSTEM_SET: en_US.UTF-8"
 
 echo ""
 show_info "$MSG_SELECT_KEYMAPS"
@@ -91,7 +91,7 @@ if selected=$(gum choose --no-limit "${keymap_options[@]}"); then
     keymap_code=$(echo "$line" | grep -oP '\([a-z]+\)' | tr -d '()')
     if [[ -n "$keymap_code" ]]; then
       temp_keymaps+=("$keymap_code")
-      show_info "Selected: $keymap_code"
+      show_info "$MSG_KEYMAP_SELECTED: $keymap_code"
     fi
   done <<< "$selected"
 
@@ -104,12 +104,12 @@ fi
 # Set primary keymap (first selected)
 primary_keymap="${selected_keymaps[0]}"
 echo "KEYMAP=$primary_keymap" > /etc/vconsole.conf
-show_success "Console keymap: $primary_keymap"
+show_success "$MSG_KEYMAP_CONSOLE_SET: $primary_keymap"
 
 # Additional keymaps will be available in Hyprland/desktop (configured by user later)
 if [[ ${#selected_keymaps[@]} -gt 1 ]]; then
-  show_info "Additional keymaps selected: ${selected_keymaps[*]}"
-  show_info "Configure them in Hyprland: ~/.config/hypr/input.conf"
+  show_info "$MSG_KEYMAP_ADDITIONAL: ${selected_keymaps[*]}"
+  show_info "$MSG_KEYMAP_HYPRLAND_INFO"
 fi
 
 echo ""

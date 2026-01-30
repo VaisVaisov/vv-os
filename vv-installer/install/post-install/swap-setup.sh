@@ -43,7 +43,7 @@ else
   esac
 fi
 
-show_info "RAM: ${RAM_GB}GB, swapfile: ${SWAPFILE_SIZE}"
+show_info "$MSG_SWAP_CONFIG_INFO: ${RAM_GB}GB / ${SWAPFILE_SIZE}"
 
 # Install zram-generator (if not already installed)
 if ! pacman -Q zram-generator &>/dev/null; then
@@ -79,7 +79,7 @@ if [[ ! -f /swapfile ]] && ! grep -q '/swapfile' /etc/fstab 2>/dev/null; then
 
     # For Btrfs: create empty file and disable COW BEFORE writing data
     if [[ "$ROOT_FS" == "btrfs" ]]; then
-      show_info "Detected Btrfs, preparing swapfile with NOCOW..."
+      show_info "$MSG_SWAP_BTRFS_NOCOW"
       # 1. Create empty file
       sudo truncate -s 0 /swapfile
       # 2. Set NOCOW attribute (must be on empty file!)

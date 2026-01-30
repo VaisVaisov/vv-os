@@ -1,28 +1,28 @@
 #!/bin/zsh
-# Универсальный лаунчер для игр
-# Автоматически применяет GameMode + NVIDIA PRIME
+# Universal game launcher
+# Automatically applies GameMode + NVIDIA PRIME
 #
-# Использование в Steam/Lutris/XMCL:
+# Usage in Steam/Lutris/XMCL:
 # prime-launcher %command%
 
 if [[ $# -eq 0 ]]; then
     echo "Usage: prime-launcher [command] [args...]"
-    echo "Автоматически применяет GameMode + NVIDIA GPU"
+    echo "Automatically applies GameMode + NVIDIA GPU"
     echo ""
-    echo "Примеры:"
+    echo "Examples:"
     echo "  Steam: prime-launcher %command%"
     echo "  Lutris: prime-launcher %command%"
     echo "  XMCL: prime-launcher minecraft"
     exit 1
 fi
 
-# Проверяем наличие GameMode
+# Check for GameMode
 if command -v gamemoderun &>/dev/null; then
     GAMEMODE="gamemoderun"
 else
-    echo "Warning: gamemoderun не найден, запуск без GameMode"
+    echo "Warning: gamemoderun not found, running without GameMode"
     GAMEMODE=""
 fi
 
-# Всегда используем prime-run (NVIDIA GPU) + GameMode
+# Always use prime-run (NVIDIA GPU) + GameMode
 exec $GAMEMODE prime-run "$@"

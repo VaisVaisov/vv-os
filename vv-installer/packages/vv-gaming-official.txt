@@ -9,8 +9,3 @@ wine-gecko
 wine-mono
 winetricks
 python-protobuf
-
-# Retro emulators
-retroarch
-retroarch-assets-xmb
-retroarch-assets-ozone

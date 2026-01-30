@@ -8,3 +8,4 @@ jdk-openjdk
 cmake
 clang
 bat
+zerotier-one
