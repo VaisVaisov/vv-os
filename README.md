@@ -22,6 +22,11 @@
 
 ---
 
+> **⚠️ Project Archived**
+> Development on VV OS has stopped. The problem it was built to solve — complex Arch Linux setup with a gaming-ready desktop — no longer exists for me personally. The code stays here as a reference; feel free to fork and take it wherever you want.
+
+---
+
 ## What is VV OS?
 
 **VV OS** is a custom Arch Linux distribution designed for cyberpunk enthusiasts and gamers. It combines cutting-edge Wayland technology (Hyprland compositor + Noctalia Shell) with a complete gaming stack and automatic Material Design 3 theming.
